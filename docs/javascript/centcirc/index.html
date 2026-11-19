@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MortonFox.com: Find Center of Circle Given 3 Points on the Circumference</title>
+
+  <link rel="shortcut icon" href="/assets/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link href='/assets/stylesheets/default-14fe0173e29cc3b890390addd200b7dc.css' type='text/css' rel='stylesheet' media='all'></head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-3 siteicon">
+                    <a href="/"><img src="/assets/media/siteicon.png" width="110" height="100" alt="site icon"></a>
+                </div>
+                <div class="col-xs-9">
+                    <h1>MortonFox.com<br><small>Using the nuclear option every day!</small></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="sidemenu nav nav-pills nav-stacked">
+                    <li ><a href="/">Home</a></li>
+                    <li ><a href="/about">About Me</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li ><a href="/about/findmeon">Find me on...</a></li>
+                          <li ><a href="/about/contact">Contact me</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/hobbies">Hobbies</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/con_reports">Con Reports</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/furry">Furry</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/fursuits">Fursuits</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/geocaching">Geocaching</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/wheresgeorge">Where&#39;s George?</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/postcrossing">Postcrossing</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/projects">Projects</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/projects/youtim">YouTim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twitvim">TwitVim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/plainsq">PlainSquare</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/nuvigc">nuvigc</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twstat">twstat and twstat-web</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/tenmill">10 Million Photos Flickr group stats</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cvtmyc">Convert Mycaches</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cr48">Cr-48 binaries</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/otherproj">Other projects</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/java">Java Programs</a></li>
+                        <li 
+                          
+                          class="active"
+                          ><a href="/projects/js">Javascript Programs</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/attic">Attic</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/attic/icqamc">Morton and Digeri&#39;s ICQ Away Message collection</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/attic/photo">Photo Archive</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <h1>Find Center of Circle Given 3 Points on the Circumference</h1>
+                <script type="text/javascript">
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+    return true;
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    write(str);
+    var output = document.getElementById("output");
+    var newline = document.createElement("br");
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+function sqr(a) {
+    return a * a;
+}
+
+function dist(a, b) {
+    return Math.sqrt(sqr(a[0]-b[0]) + sqr(a[1] - b[1]));
+}
+
+function circle(b, c, d) {
+    var temp = sqr(c[0]) + sqr(c[1]);
+    var bc = (sqr(b[0]) + sqr(b[1]) - temp) / 2.;
+    var cd = (temp - sqr(d[0]) - sqr(d[1])) / 2.;
+    var det = (b[0]-c[0]) * (c[1]-d[1]) - (c[0]-d[0]) * (b[1]-c[1]);
+
+    if (Math.abs(det) < 1e-14)
+    return false;
+
+    var circ = new Array(
+    (bc * (c[1]-d[1]) - cd * (b[1]-c[1])) / det,
+    ((b[0]-c[0]) * cd - (c[0]-d[0]) * bc) / det
+    );
+
+    return circ;
+}
+
+function coord2str(b) {
+    return "(" + b[0] + ", " + b[1] + ")";
+}
+
+function main() {
+    clearOutput();
+    var inputfield = document.getElementById("input");
+    var floatpat = /[-+]?\d*\.?\d+([eE][-+]?\d+)?/g;
+
+    var floatcount = 0;
+    var result;
+    var nums = new Array();
+    floatpat.lastIndex = 0; // Always start exec() from beginning of string.
+    while (floatcount < 6 && 
+        (result = floatpat.exec(inputfield.value)) != null)
+    nums[floatcount++] = parseFloat(result[0]);
+
+    if (floatcount < 6) {
+    errorln("Please enter 6 numbers for the 3 coordinates.");
+    return false;
+    }
+
+    var b = new Array(nums[0], nums[1]);
+    var c = new Array(nums[2], nums[3]);
+    var d = new Array(nums[4], nums[5]);
+
+    writeln("b = " + coord2str(b));
+    writeln("c = " + coord2str(c));
+    writeln("d = " + coord2str(d));
+
+    var circ = circle(b, c, d);
+    if (circ === false) {
+    errorln("The 3 points lie on a straight line.");
+    return false;
+    }
+
+    writeln(" ");
+    writeln("center = " + coord2str(circ));
+    writeln(" ");
+    writeln("dist from b = " + dist(b, circ));
+    writeln("dist from c = " + dist(c, circ));
+    writeln("dist from d = " + dist(d, circ));
+
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  clearOutput();
+});
+</script>
+
+<style type="text/css">
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 { font-size: 20px; }
+
+.error { color: red; }
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+
+form { margin: 1em 0; }
+</style>
+
+<noscript>
+<span class="error">The Circle Finder requires a browser that
+supports Javascript.<br />Your browser either does not support
+Javascript or it has Javascript disabled. If you wish to run the
+solver, please upgrade your browser or enable Javascript support.<br
+/>&nbsp;<br /></span></noscript>
+
+<script type="text/javascript">
+<!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write("<span class=\"error\">The Circle Finder requires a browser that supports the W3C DOM API.<br />Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.<br />&nbsp;<br /></span>");
+}
+// -->
+</script>
+
+<p><strong>Note:</strong> This project has been superseded by <a href="/projects/youtim">YouTim</a>.</p>
+
+<form action="#">
+    <label>Enter 3 coordinates along the circumference of the circle:<br />
+    <textarea name="input" id="input" rows="3" cols="40">
+672645 4534460
+671115 4533921
+672336 4532442</textarea>
+    </label><br />
+    <input value="Find circle" type="submit" onclick="main(); return false;" />
+    <input value="Clear results" onclick="clearOutput();" type="button" />
+</form>
+
+<hr />
+
+<p><br />
+<div id="output"></div></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- vim: set tw=0 et: -->

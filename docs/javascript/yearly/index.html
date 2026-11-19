@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MortonFox.com: Yearly Calendar</title>
+
+  <link rel="shortcut icon" href="/assets/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link href='/assets/stylesheets/default-14fe0173e29cc3b890390addd200b7dc.css' type='text/css' rel='stylesheet' media='all'></head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-3 siteicon">
+                    <a href="/"><img src="/assets/media/siteicon.png" width="110" height="100" alt="site icon"></a>
+                </div>
+                <div class="col-xs-9">
+                    <h1>MortonFox.com<br><small>Using the nuclear option every day!</small></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="sidemenu nav nav-pills nav-stacked">
+                    <li ><a href="/">Home</a></li>
+                    <li ><a href="/about">About Me</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li ><a href="/about/findmeon">Find me on...</a></li>
+                          <li ><a href="/about/contact">Contact me</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/hobbies">Hobbies</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/con_reports">Con Reports</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/furry">Furry</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/fursuits">Fursuits</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/geocaching">Geocaching</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/wheresgeorge">Where&#39;s George?</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/postcrossing">Postcrossing</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/projects">Projects</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/projects/youtim">YouTim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twitvim">TwitVim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/plainsq">PlainSquare</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/nuvigc">nuvigc</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twstat">twstat and twstat-web</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/tenmill">10 Million Photos Flickr group stats</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cvtmyc">Convert Mycaches</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cr48">Cr-48 binaries</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/otherproj">Other projects</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/java">Java Programs</a></li>
+                        <li 
+                          
+                          class="active"
+                          ><a href="/projects/js">Javascript Programs</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/attic">Attic</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/attic/icqamc">Morton and Digeri&#39;s ICQ Away Message collection</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/attic/photo">Photo Archive</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <h1>Yearly Calendar</h1>
+                <script type="text/javascript">
+// Clear the output area.
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a bold string to the output area.
+function writebold(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var bold = document.createElement("b");
+    bold.appendChild(txt);
+    output.appendChild(bold);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Use Zeller's congruence to determine the day of the week for 
+// a specified date.
+// Returns: 0-6 representing Sun-Sat
+function dayofweek(day, month, year) {
+    var century;
+    var yr;
+
+    if (month <= 2) {
+    month += 10;
+    --year;
+    }
+    else
+    month -= 2;
+
+    century = Math.floor(year / 100);
+    yr = year % 100;
+
+    return (Math.floor((26 * month - 2) / 10) + 
+        day + yr + 
+        Math.floor(yr / 4) + 
+        Math.floor(century / 4) +
+        203 - 2 * century) % 7;
+}
+
+// Returns true if leap year.
+function leapyear(year) {
+    return (year % 400 == 0) || (year % 4 == 0) && (year % 100 != 0);
+}
+
+// Get last day of the month.
+function getmaxday(month, year) {
+    var monthlen = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var maxday = monthlen[month - 1];
+    if (month == 2 && leapyear(year))
+    ++maxday;
+    return maxday;
+}
+
+// Returns a string of nspaces space characters.
+function spacer(nspaces) {
+    var str = "";
+    for (var i = 0; i < nspaces; ++i)
+    str += " ";
+    return str;
+}
+
+// Format s flush right in a field of width characters.
+function flushright(s, width) {
+    var str = s.toString();
+    return spacer(width - str.length) + str;
+}
+
+function generateCalendar(year) {
+    var monthnames = [
+    "January", "February", "March",
+    "April", "May", "June",
+    "July", "August", "September",
+    "October", "November", "December"
+    ];
+
+    // Center the year at the top.
+    write(spacer(Math.floor((70 - year.toString().length) / 2)));
+    writebold(year);
+    writeln("");
+    // There needs to be at least one space between the two linebreaks
+    // or IE will only render one linebreak.
+    writeln(" ");
+
+    for (var row = 0; row <= 3; ++row) {
+    for (var col = 0; col <= 2; ++col) {
+        var monthname = monthnames[row * 3 + col];
+        var spacebefore = Math.floor((19 - monthname.length) / 2) + 2;
+
+        // Center the month name over the month.
+        write(spacer(spacebefore));
+        writebold(monthname);
+        write(spacer(24 - monthname.length - spacebefore));
+    }
+    writeln("");
+    writeln(" ");
+
+    // Write the day name headings.
+    for (var col = 0; col <= 2; ++col) 
+        write("  S  M  T  W  T  F  S   ");
+    writeln("");
+
+    // Format the months one row at a time.
+    for (var vcell = 0; vcell <= 5; ++vcell) {
+        for (var col = 0; col <= 2; ++col) {
+        var month = row * 3 + col + 1;
+        var maxday = getmaxday(month, year);
+        var firstday = dayofweek(1, month, year);
+        for (var hcell = 0; hcell <= 6; ++hcell) {
+            var day = vcell * 7 + hcell + 1 - firstday;
+            write(day > 0 && day <= maxday ? flushright(day,3) : "   ");
+        }
+        write("   ");
+        }
+        writeln("");
+    }
+    writeln(" ");
+    }
+} // generateCalendar
+
+function main() {
+    clearOutput();
+
+    var field = document.getElementById("year");
+    var year = parseInt(field.value);
+    if (isNaN(year) || year < 1) {
+    errorln("Invalid year '" + field.value + "'. Need a positive integer.");
+    return;
+    }
+
+    generateCalendar(year);
+}
+
+// Set the year field to the current year.
+function init() {
+    var now = new Date();
+    var field = document.getElementById("year");
+    field.value = now.getFullYear();
+    main();
+}
+
+// For moving to the next or previous year. delta should be 1 or -1.
+function nextyear(delta) {
+    var field = document.getElementById("year");
+    var year = parseInt(field.value);
+    if (!isNaN(year))
+    field.value = year + delta;
+    main();
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  init();
+});
+</script>
+
+<style type="text/css">
+body {
+    background: #fff;
+    color: #000;
+    font: normal 14px sans-serif;
+}
+
+h1 {
+    font: bold 18px sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    background: #cff;
+    white-space: pre;    
+    font: normal 14px monospace;
+}
+
+form {
+    margin-bottom: 0.5em;
+}
+</style>
+
+<noscript>
+    <span class="error">
+    The Yearly Calendar requires a browser that supports Javascript.<br />
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to generate the calendar, please upgrade your browser or enable Javascript support.<br />&nbsp;<br />
+    </span>
+</noscript>
+
+<script type="text/javascript">
+<!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+document.write('<span class="error">The Yearly Calendar requires a browser that supports the W3C DOM API.<br \/>Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.<br \/>&nbsp;<br \/><\/span>');
+}
+// -->
+</script>
+
+<form action="#" onsubmit="main(); return false;">
+    <a href="#" onclick="nextyear(-1); return false;">&lt;&lt;</a>
+    <input type="text" name="year" id="year" size="10" value="" />
+    <a href="#" onclick="nextyear(1); return false;">&gt;&gt;</a>
+</form>
+
+<hr />
+
+<table><tr><td><div id="output"></div></td></tr></table>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- vim: set tw=0 et: -->

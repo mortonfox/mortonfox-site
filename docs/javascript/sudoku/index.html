@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MortonFox.com: Sudoku Solver</title>
+
+  <link rel="shortcut icon" href="/assets/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link href='/assets/stylesheets/default-14fe0173e29cc3b890390addd200b7dc.css' type='text/css' rel='stylesheet' media='all'></head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-3 siteicon">
+                    <a href="/"><img src="/assets/media/siteicon.png" width="110" height="100" alt="site icon"></a>
+                </div>
+                <div class="col-xs-9">
+                    <h1>MortonFox.com<br><small>Using the nuclear option every day!</small></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="sidemenu nav nav-pills nav-stacked">
+                    <li ><a href="/">Home</a></li>
+                    <li ><a href="/about">About Me</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li ><a href="/about/findmeon">Find me on...</a></li>
+                          <li ><a href="/about/contact">Contact me</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/hobbies">Hobbies</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/con_reports">Con Reports</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/furry">Furry</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/fursuits">Fursuits</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/geocaching">Geocaching</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/wheresgeorge">Where&#39;s George?</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/postcrossing">Postcrossing</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/projects">Projects</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/projects/youtim">YouTim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twitvim">TwitVim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/plainsq">PlainSquare</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/nuvigc">nuvigc</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twstat">twstat and twstat-web</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/tenmill">10 Million Photos Flickr group stats</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cvtmyc">Convert Mycaches</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cr48">Cr-48 binaries</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/otherproj">Other projects</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/java">Java Programs</a></li>
+                        <li 
+                          
+                          class="active"
+                          ><a href="/projects/js">Javascript Programs</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/attic">Attic</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/attic/icqamc">Morton and Digeri&#39;s ICQ Away Message collection</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/attic/photo">Photo Archive</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <h1>Sudoku Solver</h1>
+                <script type="text/javascript">
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Display the board.
+function printboard(board) {
+    for (var i = 0; i < 9; ++i)
+    writeln(board[i].join(""));
+}
+
+// Parse the board info from the text area.
+function processinput(board) {
+    var input = document.getElementById("input");
+    
+    var lineno = 0;
+    var lines = input.value.split("\n", 100);
+    for (var i = 0; i < lines.length; ++i) {
+    var line = lines[i].replace(/\s+/g, "");
+    if (line.length > 0) {
+        if (line.length < 9) {
+        errorln("line " + lineno + " '" + line + "' is too short.");
+        return false;
+        }
+//      writeln(line);
+        var row = new Array();
+        for (var j = 0; j < 9; ++j) {
+        var tmp = parseInt(line.charAt(j));
+        row[j] = isNaN(tmp) ? 0 : tmp;
+        }
+        board[lineno++] = row;
+    }
+    }
+    if (lineno < 9) {
+    errorln("not enough rows. only " + lineno + " found.");
+    return false;
+    }
+    return true;
+}
+
+// Return a list of numbers that could go into cell row, col on the board.
+function getpossible(board, row, col) {
+    var used = [];
+
+// Check row and column.
+    for (var i = 0; i < 9; ++i) {
+    used[board[row][i]] = true;
+    used[board[i][col]] = true;
+    }
+
+// Check the 3x3 block containing this cell.
+    var blockrow = row - row % 3;
+    var blockcol = col - col % 3;
+    for (var i = blockrow; i < blockrow + 3; ++i) {
+    for (var j = blockcol; j < blockcol + 3; ++j)
+        used[board[i][j]] = true;
+    }
+
+    var possible = [];
+    for (var i = 1; i <= 9; ++i)
+    if (!used[i])
+        possible.push(i);
+    return possible;
+}
+
+var nodecount;
+
+// Recursive function to find a solution by exhaustive search.
+function tryboard(board, row, col) {
+    if (row >= 9 || col >= 9) {
+    writeln("");
+    writeln("Found a solution:");
+    printboard(board);
+    return true;
+    }
+    
+    ++nodecount;
+
+    var nextrow = row;
+    var nextcol = col + 1;
+    if (nextcol >= 9) {
+    nextrow = row + 1;
+    nextcol = 0;
+    }
+
+// Skip over cells that are already filled.
+    if (board[row][col] != 0)
+    return tryboard(board, nextrow, nextcol);
+
+    var possible = getpossible(board, row, col);
+    while (possible.length > 0) {
+    var cell = possible.shift();
+    board[row][col] = cell;
+    if (tryboard(board, nextrow, nextcol))
+        return true;
+    }
+    board[row][col] = 0;
+    return false;
+}
+
+function main() {
+    clearOutput();
+    var board = [];
+    if (processinput(board)) {
+    writeln("Puzzle:");
+    printboard(board);
+    nodecount = 0;
+    var start = new Date();
+    if (!tryboard(board, 0, 0))
+        writeln("No solution found");
+    var end = new Date();
+    var elapsed = (end.getTime() - start.getTime()) / 1000;
+    writeln(nodecount + " nodes examined");
+    writeln("Elapsed time: " + elapsed + " seconds");
+    }
+}
+
+</script>
+
+<style type="text/css">
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+</style>
+
+<noscript>
+    <span class="error">
+    The Sudoku Solver requires a browser that supports Javascript.<br />
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the solver, please upgrade your browser or enable Javascript support.<br />&nbsp;<br />
+    </span>
+</noscript>
+
+<script type="text/javascript">
+<!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('<span class="error">The Sudoku Solver requires a browser that supports the W3C DOM API.<br \/>Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.<br \/>&nbsp;<br \/><\/span>');
+}
+// -->
+</script>
+
+<form action="#">
+    Enter the puzzle below:<br />
+    <textarea id="input" rows="15" cols="40">xxx 6xx 9x2
+xx6 1xx x87
+2x7 5xx xx1
+
+xxx xx8 7xx
+4x2 xxx 1x6
+xx9 2xx xxx
+
+6xx xx3 5x8
+59x xx1 2xx
+8x4 xx7 xxx</textarea><br />
+    <input type="submit" value="Solve it!" onclick="main(); return false;" />
+</form>
+
+<hr />
+
+<div id="output">
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- vim: set tw=0 et: -->

@@ -1,0 +1,181 @@
+Plush Picture Database
+vim:set tw=0:
+Last updated: April 16, 2000
+
+* canine.htm Canine Plushies
+commfox.jpg Fox plushie by Commonwealth.
+porkchop.jpg Porkchop (Doug's dog) beanbag from the Disney Store.
+wuffies.jpg Wolf slippers.
+gundfox.jpg Fox by Gund.
+=gundfox2.jpg Fox by Gund.
+fox2.jpg Sherwood the fox by 24K.
+=plushb.jpg Sherwood the fox by 24K.
+scfox.jpg Fox by Soft Classics.
+beanbot.jpg Beanbottom Puppy by Gund.
+pooka.jpg Pooka toy from Burger King.
+pooka2.jpg Pooka by Galoob.
+robin_hood_beanie.jpg Robin Hood beanie from the Disney Store.
+foxbag.jpg Fox backpack by Mango.
+disneyfox.jpg Fox beanie from Disney's Mary Poppins.
+stbernard.jpg St Bernard by Gund.
+dakinwolf.jpg Wolf by Dakin.
+dexter.jpg Dexter by Gund.
+muttsy.jpg Muttsy by Gund.
+ikeafox.jpg IKEA fox.
+beanfox.jpg Beanie fox by Plush Creations.
+gunddalmatian.jpg Dalmatian by Gund.
+freewaydog.jpg Freeway Dog by Gund.
+robinhood.jpg Robin Hood plushie from the Disney Store.
+
+* raccoon.htm Raccoon Plushies
+fbbcoon.jpg Beanie raccoon by Fiesta.
+sccoon.jpg Raccoon by Soft Classics.
+emotcoon.jpg Raccoon by Emotions.
+racoon1.jpg Christmas raccoon beanie by Commonwealth. (Snowden and Friends)
+meekoppt.jpg Meeko hand puppet.
+=meekopup.jpg Meeko hand puppet.
+meeko.jpg Meeko the raccoon by Mattel.
+=meeko1.jpg Meeko the raccoon by Mattel.
+=meeko2.jpg Meeko the raccoon by Mattel.
+gundcoon.jpg Raccoon by Gund.
+gmeeko.jpg Gigglin' Meeko.
+ringoraccoon.jpg Ringo the Raccoon beanie by Stuffins.
+raccoonpuppet.jpg Raccoon puppet by Plush Creations.
+smallmeeko.jpg Smaller version of Meeko by Mattel.
+douglasmeeko.jpg Giant Meeko by Douglas.
+
+* kangaroo.htm Kangaroo Plushies
+musicroo.jpg Music box kangaroo by Ikea.
+pockets.jpg Pockets the kangaroo by Gund.
+=pockets2.jpg Pockets the kangaroo by Gund.
+kellytoy_roos.jpg Kangaroos by Kellytoy.
+kanga.jpg A big Kanga plushie.
+disneykanga.jpg Kanga beanie.
+roodykangaroo.jpg Roody the Kangaroo by Kellytoy.
+
+* skunk.htm Skunk Plushies
+scskunk.jpg Skunk by Soft Classics.
+=skunk.jpg Skunk by Soft Classics.
+disneyflower.jpg Disney's Flower beanie.
+skunkpuppet.jpg Skunk puppet by Folkmanis.
+softclassicsskunk.jpg Skunk by Soft Classics.
+pepekeychain.jpg Pepe Le Pew keychain from WB Store.
+cascadeskunkpuppet.jpg Skunk puppet by Cascade.
+
+* bunny.htm Bunny Plushies
+biggreen.jpg Big green bunny (3 feet high) by A&A Plush.
+bstrbabs.jpg Buster and Babs Bunny (no relation) plushies.
+=bunny_and_meeko.jpg The big green bunny again and Meeko.
+=wbunny.jpg White bunny by IKEA.
+pinkbunny.jpg Pink bunny by Gund.
+whitebunny.jpg White bunny with carrot by Gund.
+kellytoybunny.jpg Bunny by Kellytoy.
+huggles.jpg Huggles by Gund.
+beanbottombunny.jpg Bean Bottom Bunny by Gund.
+bugsbunny.jpg Bugs Bunny.
+mattelrabbit.jpg Rabbit by Mattel.
+
+* feline.htm Feline Plushies
+leobean.jpg Tiny leopard beanbag plushie by Russ.
+leopard.jpg Leopard by Kellytoy.
+=leopard2.jpg Leopard by Kellytoy.
+gundlion.jpg Lion by Gund.
+gundlion2.jpg Another lion by Gund.
+gundlion3.jpg Yet another lion by Gund.
+tony1.jpg Tony the Tiger.
+wtiger.jpg White tiger by Soft Classics. (Sold)
+panther3.jpg Large panther (3 feet long) by Kellytoy.
+=blackpanther.jpg Large panther (3 feet long) by Kellytoy.
+gundleopard.jpg Leopard by Gund.
+gundtiger.jpg Tiger by Gund.
+catnip.jpg Catnip by Gund.
+gundtigger.jpg Tigger by Gund.
+sylvester.jpg Sylvester.
+gundminitiger.jpg Small tiger by Gund.
+gundlionpuppet.jpg Lion puppet by Gund.
+gundpanther.jpg Panther by Gund.
+disneytigger.jpg Tigger from the Disney Store.
+gundtigger2.jpg Tigger by Gund.
+
+* avian.htm Avian Plushies
+roadrunner_silhouette.jpg Silhouette of the road runner plushie.
+gundgoos.jpg White goose by Gund.
+penguin.jpg A penguin plushie by Plush Creations.
+woody1.jpg Woody Woodpecker by Gund.
+duck.jpg Duck by Chosun.
+snowflake.jpg Snowflake the penguin by Gund.
+
+* dragon.htm Dragon Plushies
+smlfigmt.jpg Smaller version of Figment the dragon.
+figment.jpg Figment the dragon.
+pinkdragon.jpg Pink dragon by Gund.
+
+* bear.htm Bear Plushies
+polar1.jpg Polar bear by Plush Creations.
+polar.jpg Polar bear by Gund.
+=gundpolarbear.jpg Polar bear by Gund.
+dogtoybr.jpg Polar bear by Gund. This is sold as a dog's toy hence the rough construction. It squeaks too.
+
+* mouse.htm Mouse Plushies
+pinky.jpg Pinky the mouse from the WB Studio Store.
+=dakinpinky.jpg Pinky the mouse from the WB Studio Store.
+disneybernard.jpg Disney's Bernard the mouse beanie.
+fievel.jpg Fievel Goes West.
+
+* mammal.htm Other Mammalian Plushies
+zebra1.jpg Zebra beanie by Plush Creations.
+beaver1.jpg Dammit the beaver by Gund.
+=beaver2.jpg Dammit the beaver by Gund.
+skeeter.jpg Skeeter the squirrel by Gund.
+elephant.jpg Elephant by Gund.
+stilts.jpg Stilts the giraffe by Gund.
+bartok.jpg Bartok the bat by Applause.
+squirrel.jpg Squirrel beanie by Plush Creations. (Sold)
+gundcowpuppet.jpg Cow puppet by Gund.
+gundelephant.jpg Elephant by Gund.
+otterpuppet.JPG Otter puppet by Folkmanis.
+otter.jpg Small of the Wild otter.
+disneygopher.jpg Disney's gopher beanie.
+disneylemur.jpg Disney's lemur beanie.
+devilcow.jpg Devil Cow by Kellytoy.
+ikeasquirrel.jpg IKEA squirrel.
+faoferret1.jpg Ferret from FAO Schwarz.
+faoferret2.jpg Ferret from FAO Schwarz.
+platypus.jpg Platypus by Gund.
+buttercup.jpg Buttercup the cow by Gund.
+walruspuppet.jpg Walrus puppet by Gund.
+kellytoyseal.jpg Seal by Kellytoy.
+gundpanda.jpg Panda by Gund.
+gundkoala.jpg Koala by Gund.
+tinyelephant.jpg Tiny the elephant (Snowden and Friends) by Commonwealth.
+dizzydevil.jpg Dizzy Devil (Tiny Toons) by Applause.
+gundmoose.jpg Moose by Gund.
+pippop.jpg Pip and Pop the otters. (Bear in the Big Blue House)
+flypig.jpg Winged pig by Gund.
+
+* misc.htm Miscellaneous Plush Pictures and Group Pictures
+creature.jpg Small beanbag plushie that came with the Creatures 2 game. (Mindscape)
+=room4.jpg Part of my room.
+=room3.jpg Part of my room.
+=room2.jpg Part of my room.
+=room1.jpg Part of my room.
+monitor.jpg Some beanbag plushies that sit on my monitor: Robin Hood and Maid Marion beanies from the Disney Store, raccoon beanie by Fiesta, and rabbit, skunk and fox beanies by Ty.
+smiley1.jpg Smiley the shark by Gund.
+=smiley2.jpg Smiley the shark by Gund.
+snctails.jpg Sonic and Tails plushies.
+lugskyg.jpg White rabbit and fox by Ikea.
+=acplush.jpg Raccoon by Gund and leopard by Kellytoy. Taken in the hotel room at AAC98.
+beanies.jpg A few Ty beanies: Pouch the kangaroo, Ears the rabbit, Stinky the skunk, Sly the fox.
+group01.jpg A group of plushies: baby seal by Gund, kangaroo by Ikea, Kanga and Roo (background), and fox by Soft Classics.
+eyenimal.JPG Ralphy the Raptor by Eyenimal.
+tigershark.jpg Tigershark meanie.
+yakkowakkodot.JPG Yakko, Wakko and Dot.
+charmander.jpg Charmander plush pillow.
+greendino.jpg Green dinosaur by Trudy.
+ikeabeaver.jpg IKEA beaver.
+ikeadeer.jpg IKEA deer.
+kandm.jpg Small otter, snow leopard and horse by K&amp;M.
+squirtle.jpg Squirtle plush pillow.
+gundcroc2.jpg Crocodile by Gund.
+
+

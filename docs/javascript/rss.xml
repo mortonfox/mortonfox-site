@@ -1,0 +1,1502 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title/>
+    <description/>
+    <link/>
+    <pubDate>2026-11-19</pubDate>
+    <item>
+      <title>Coordinates Converter</title>
+      <link>/javascript/geoconv</link>
+      <description>&lt;script type="text/javascript"&gt;
+
+var result_count = 0;
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+
+    document.getElementById("outnorth").value = "";
+    document.getElementById("outwest").value = "";
+    document.getElementById("outcoords").value = "";
+    document.getElementById("outgeotag").value = "";
+    result_count = 0;
+    return true;
+}
+
+function newFrag() {
+    return document.createDocumentFragment();
+}
+
+function writeFrag(frag) {
+    var output = document.getElementById("output");
+    output.insertBefore(frag, output.firstChild);
+}
+
+// Write a string to the document fragment.
+function write(frag, str) {
+    var txt = document.createTextNode(str);
+    frag.appendChild(txt);
+}
+
+// Write a string with a newline to the document fragment.
+function writeln(frag, str) {
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    frag.appendChild(txt);
+    frag.appendChild(newline);
+}
+
+// Write a heading with a newline to the document fragment.
+function writeln_head(frag, str) {
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var head = document.createElement("u");
+    head.appendChild(txt);
+    frag.appendChild(head);
+    frag.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.insertBefore(span, output.firstChild);
+}
+
+// Format floating point number in fixed-point notation.
+function fixedfmt(num, decimals) {
+    // Number.toFixed is a Javascript 1.5 feature, so we need to
+    // test for it here.
+    return num.toFixed ? num.toFixed(decimals) : num;
+}
+
+// Convert coordinates from ddd mm.mmm to decimals.
+function convert(deg, minwhole, mindec) {
+    // Force the decimal portion of the minutes to be 3 decimal places.
+    // And then trim leading zeros.
+    mindec = ((mindec + "000") . slice(0, 3) . replace(/^0+/, "")) || "0";
+
+    // Trim leading zeros so that the string will not be treated as octal.
+    minwhole = minwhole.replace(/^0+/, "") || "0";
+    deg = deg.replace(/^0+/, "") || "0";
+
+    return parseInt(deg) + (parseInt(minwhole) + parseInt(mindec) / 1000) / 60;
+}
+
+function main() {
+    var inputfield = document.getElementById("input");
+    var coordpat = /(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)/;
+    var result = inputfield.value.match(coordpat);
+    if (result == null) {
+    errorln("Not recognized as coordinates: '" + inputfield.value + "'");
+    return false;
+    }
+    var northcoord = fixedfmt(convert(result[1], result[2], result[3]), 6);
+    var westcoord = fixedfmt(-convert(result[4], result[5], result[6]), 6);
+    ++result_count;
+
+    var nwcoords = northcoord + " " + westcoord;
+    var geotag = "geotagged geo:lat=" + northcoord + " geo:lon=" + westcoord;
+
+    var frag = newFrag();
+    writeln_head(frag, result_count + ": " + inputfield.value);
+    writeln(frag, northcoord);
+    writeln(frag, westcoord);
+    writeln(frag, nwcoords);
+    writeln(frag, geotag);
+    writeln(frag, " ");
+    writeFrag(frag);
+
+    document.getElementById("outnorth").value = northcoord;
+    document.getElementById("outwest").value = westcoord;
+    document.getElementById("outcoords").value = nwcoords;
+    document.getElementById("outgeotag").value = geotag;
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  clearOutput();
+});
+&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 { font-size: 20px; }
+
+.error { color: red; }
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+
+form { margin: 1em 0; }
+
+input[type="text"]:hover { background: #ffa; }
+&lt;/style&gt;
+
+&lt;noscript&gt;
+    &lt;span class="error"&gt;
+    The Coordinates Converter requires a browser that supports Javascript.&lt;br /&gt;
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the solver, please upgrade your browser or enable Javascript support.&lt;br /&gt;&amp;nbsp;&lt;br /&gt;
+    &lt;/span&gt;
+&lt;/noscript&gt;
+
+&lt;script type="text/javascript"&gt;
+&lt;!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('&lt;span class="error"&gt;The Coordinates Converter requires a browser that supports the W3C DOM API.&lt;br \/&gt;Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.&lt;br \/&gt;&amp;nbsp;&lt;br \/&gt;&lt;\/span&gt;');
+}
+// --&gt;
+&lt;/script&gt;
+
+&lt;form action="#" onsubmit="main(); return false;"&gt;
+    &lt;label&gt;Enter dd mm.mmm coordinates here to get dd.dddddd coordinates below:&lt;br /&gt;
+    &lt;input type="text" name="input" id="input" size="60" value="n39 40.401 w74 17.207" onfocus="select();" /&gt;&lt;/label&gt;&lt;br /&gt;
+    &lt;input type="submit" value="Convert it" /&gt;&amp;nbsp;
+    &lt;input type="button" value="Clear results" onclick="clearOutput();" /&gt;
+&lt;/form&gt;
+
+&lt;hr /&gt;
+
+&lt;form action="#" onsubmit="return false;"&gt;
+    Results: (select/copy from below)&lt;br /&gt;
+    &lt;input type="text" id="outnorth" size="15" onclick="select();" value="" /&gt;&amp;nbsp;
+    &lt;input type="text" id="outwest" size="15" onclick="select();" value="" /&gt;&lt;br /&gt;
+    &lt;input type="text" id="outcoords" size="30" onclick="select();" value="" /&gt;&lt;br /&gt;
+    &lt;input type="text" id="outgeotag" size="60" onclick="select();" value="" /&gt;
+&lt;/form&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;div id="output"&gt;&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Find Center of Circle Given 3 Points on the Circumference</title>
+      <link>/javascript/centcirc</link>
+      <description>&lt;script type="text/javascript"&gt;
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+    return true;
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    write(str);
+    var output = document.getElementById("output");
+    var newline = document.createElement("br");
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+function sqr(a) {
+    return a * a;
+}
+
+function dist(a, b) {
+    return Math.sqrt(sqr(a[0]-b[0]) + sqr(a[1] - b[1]));
+}
+
+function circle(b, c, d) {
+    var temp = sqr(c[0]) + sqr(c[1]);
+    var bc = (sqr(b[0]) + sqr(b[1]) - temp) / 2.;
+    var cd = (temp - sqr(d[0]) - sqr(d[1])) / 2.;
+    var det = (b[0]-c[0]) * (c[1]-d[1]) - (c[0]-d[0]) * (b[1]-c[1]);
+
+    if (Math.abs(det) &lt; 1e-14)
+    return false;
+
+    var circ = new Array(
+    (bc * (c[1]-d[1]) - cd * (b[1]-c[1])) / det,
+    ((b[0]-c[0]) * cd - (c[0]-d[0]) * bc) / det
+    );
+
+    return circ;
+}
+
+function coord2str(b) {
+    return "(" + b[0] + ", " + b[1] + ")";
+}
+
+function main() {
+    clearOutput();
+    var inputfield = document.getElementById("input");
+    var floatpat = /[-+]?\d*\.?\d+([eE][-+]?\d+)?/g;
+
+    var floatcount = 0;
+    var result;
+    var nums = new Array();
+    floatpat.lastIndex = 0; // Always start exec() from beginning of string.
+    while (floatcount &lt; 6 &amp;&amp; 
+        (result = floatpat.exec(inputfield.value)) != null)
+    nums[floatcount++] = parseFloat(result[0]);
+
+    if (floatcount &lt; 6) {
+    errorln("Please enter 6 numbers for the 3 coordinates.");
+    return false;
+    }
+
+    var b = new Array(nums[0], nums[1]);
+    var c = new Array(nums[2], nums[3]);
+    var d = new Array(nums[4], nums[5]);
+
+    writeln("b = " + coord2str(b));
+    writeln("c = " + coord2str(c));
+    writeln("d = " + coord2str(d));
+
+    var circ = circle(b, c, d);
+    if (circ === false) {
+    errorln("The 3 points lie on a straight line.");
+    return false;
+    }
+
+    writeln(" ");
+    writeln("center = " + coord2str(circ));
+    writeln(" ");
+    writeln("dist from b = " + dist(b, circ));
+    writeln("dist from c = " + dist(c, circ));
+    writeln("dist from d = " + dist(d, circ));
+
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  clearOutput();
+});
+&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 { font-size: 20px; }
+
+.error { color: red; }
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+
+form { margin: 1em 0; }
+&lt;/style&gt;
+
+&lt;noscript&gt;
+&lt;span class="error"&gt;The Circle Finder requires a browser that
+supports Javascript.&lt;br /&gt;Your browser either does not support
+Javascript or it has Javascript disabled. If you wish to run the
+solver, please upgrade your browser or enable Javascript support.&lt;br
+/&gt;&amp;nbsp;&lt;br /&gt;&lt;/span&gt;&lt;/noscript&gt;
+
+&lt;script type="text/javascript"&gt;
+&lt;!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write("&lt;span class=\"error\"&gt;The Circle Finder requires a browser that supports the W3C DOM API.&lt;br /&gt;Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.&lt;br /&gt;&amp;nbsp;&lt;br /&gt;&lt;/span&gt;");
+}
+// --&gt;
+&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This project has been superseded by &lt;a href="/projects/youtim"&gt;YouTim&lt;/a&gt;.&lt;/p&gt;
+
+&lt;form action="#"&gt;
+    &lt;label&gt;Enter 3 coordinates along the circumference of the circle:&lt;br /&gt;
+    &lt;textarea name="input" id="input" rows="3" cols="40"&gt;
+672645 4534460
+671115 4533921
+672336 4532442&lt;/textarea&gt;
+    &lt;/label&gt;&lt;br /&gt;
+    &lt;input value="Find circle" type="submit" onclick="main(); return false;" /&gt;
+    &lt;input value="Clear results" onclick="clearOutput();" type="button" /&gt;
+&lt;/form&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;div id="output"&gt;&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>George Score Calculator</title>
+      <link>/javascript/gscore</link>
+      <description>&lt;script type="text/javascript"&gt;
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Format floating point number in fixed-point notation.
+function fixedfmt(num, decimals) {
+    // Number.toFixed is a Javascript 1.5 feature, so we need to test for it here.
+    return num.toFixed ? num.toFixed(decimals) : num;
+}
+
+// Get numbers from the input fields.
+function getInput() {
+    var field = document.getElementById("billsentered");
+    var obj = new Object();
+    obj.be = parseInt(field.value);
+    if (isNaN(obj.be) || obj.be &lt; 0) {
+    errorln("Invalid number '" + field.value + "' specified for bills entered. Need a non-negative number for this field.");
+    return false;
+    }
+    field = document.getElementById("totalhits");
+    obj.th = parseInt(field.value);
+    if (isNaN(obj.th) || obj.th &lt; 0) {
+    errorln("Invalid number '" + field.value + "' specified for total hits. Need a non-negative number for this field.");
+    return false;
+    }
+    field = document.getElementById("daysinactive");
+    obj.di = parseInt(field.value);
+    if (isNaN(obj.di) || obj.di &lt; 0) {
+    errorln("Invalid number '" + field.value + "' specified for days inactive. Need a non-negative number for this field.");
+    return false;
+    }
+
+    return obj;
+}
+
+// Calculate George Score
+function gs(be, th, di) {
+    return 100 * (Math.sqrt(Math.log(be)) + Math.log(th + 1)) * (1 - di / 90);
+}
+
+function showneeded(hitpred, billpred) {
+    writeln("Hits needed for 1GS  = " + fixedfmt(hitpred, 2));
+    writeln("Bills needed for 1GS = " + fixedfmt(billpred, 2));
+    writeln("Bill/Hit ratio       = " + fixedfmt(billpred / hitpred, 3));
+    writeln(" ");
+}
+
+var epsilon = 1e-10;
+
+function equal(a, b) {
+    return Math.abs(a - b) &lt; epsilon * Math.abs(a);
+}
+
+function iszero(a) {
+    return Math.abs(a) &lt; epsilon;
+}
+
+// Find an argument for which fn exceeds fn(0) by 1 or greater.
+function getupper(fn) {
+    var curgs = fn(0);
+    var upper = 1;
+    while (upper &lt; 1e9) {
+    if (fn(upper) - curgs &gt;= 1)
+        return upper;
+    upper *= 2;
+    }
+    return upper;
+}
+
+// Solve for x in the equation fn(x) - fn(0) = 1
+// Uses linear interpolation.
+function solve1gs(fn) {
+    var curgs = fn(0);
+    var a = 0;
+    var b = getupper(fn);
+    var itercount = 0;
+    var xold = a;
+
+    var fa = fn(a) - curgs - 1;
+    var fb = fn(b) - curgs - 1;
+
+    for (;;) {
+    var newx = a - fa * (b - a) / (fb - fa);
+    var newfx = fn(newx) - curgs - 1;
+
+    itercount++;
+    writeln(itercount + ": " + newx + " " + newfx);
+
+    // Sanity check. If too many iterations, quit.
+    if (itercount &gt;= 500) {
+        writeln("Too many iterations. Ending.");
+        writeln(" ");
+        return newx;
+    }
+
+    // Sanity check. If we are getting invalid numbers, quit.
+    if (isNaN(newx)) {
+        writeln("Solver failed. Ending.");
+        writeln(" ");
+        return newx;
+    }
+
+    // Check if close enough to a solution.
+    if (equal(newx, xold) || iszero(newfx)) {
+        writeln(" ");
+        return newx;
+    }
+    xold = newx;
+
+    if (fa * newfx &gt; 0) {
+        a = newx;
+        fa = newfx;
+    }
+    else {
+        b = newx;
+        fb = newfx;
+    }
+    }
+}
+
+function main() {
+    clearOutput();
+
+    var input = getInput();
+    if (!input)
+    return false;
+
+    writeln("Bills entered        = " + input.be);
+    writeln("Total hits           = " + input.th);
+    writeln("Days inactive        = " + input.di);
+    writeln("George Score         = " + fixedfmt(gs(input.be, input.th, input.di), 3));
+    writeln(" ");
+
+    showneeded(
+    (input.th + 1) / 100, 
+    input.be * Math.sqrt(Math.log(input.be)) / 50);
+
+    showneeded(
+    solve1gs(function (incrhits) { return gs(input.be, input.th + incrhits, input.di); }),
+    solve1gs(function (incrbills) { return gs(input.be + incrbills, input.th, input.di); }));
+}
+
+&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+&lt;/style&gt;
+
+&lt;p&gt;This program calculates your &lt;a href="http://www.wheresgeorge.com/"&gt;Where&amp;#39;s George&lt;/a&gt; score, given the number of bills entered and hits received. It also calculates how many bills or hits you need to increase your George Score by 1.&lt;/p&gt;
+
+&lt;noscript&gt;
+    &lt;span class="error"&gt;
+    The George Score calculator requires a browser that supports Javascript.&lt;br /&gt;
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the calculator, please upgrade your browser or enable Javascript support.&lt;br /&gt;&amp;nbsp;&lt;br /&gt;
+    &lt;/span&gt;
+&lt;/noscript&gt;
+
+&lt;script type="text/javascript"&gt;
+&lt;!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('&lt;span class="error"&gt;The George Score calculator requires a browser that supports the W3C DOM API.&lt;br \/&gt;Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.&lt;br \/&gt;&amp;nbsp;&lt;br \/&gt;&lt;\/span&gt;');
+}
+// --&gt;
+&lt;/script&gt;
+
+&lt;form action="#" onsubmit="main(); return false;"&gt;
+    &lt;table cellpadding="5"&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;label for="billsentered"&gt;Bills Entered:&lt;/label&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="billsentered" id="billsentered" size="20" value="100000" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;label for="totalhits"&gt;Total Hits:&lt;/label&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="totalhits" id="totalhits" size="20" value="20000" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;label for="daysinactive"&gt;Days Inactive:&lt;/label&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="daysinactive" id="daysinactive" size="20" value="0" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td colspan="2"&gt;&lt;input type="submit" value="Calculate!" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/form&gt;
+
+&lt;hr /&gt;
+
+&lt;div id="output"&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    <item>
+      <title>Loan Amortization Calculator</title>
+      <link>/javascript/amort</link>
+      <description>&lt;script type="text/javascript"&gt;
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Format floating point number in fixed-point notation.
+function fixedfmt(num, decimals) {
+    // Number.toFixed is a Javascript 1.5 feature, so we need to test for it here.
+    return num.toFixed ? num.toFixed(decimals) : num;
+}
+
+function fmtmoney(num) {
+    if (Math.abs(num) &lt; 0.005)
+    num = 0;
+    return "$" + fixedfmt(num, 2);
+}
+
+function fmtpct(num) {
+    return fixedfmt(num * 100, 2) + "%";
+}
+
+function flushright(s, width) {
+    var str = s.toString();
+    var pad = width - str.length;
+    for (var i = 0; i &lt; pad; ++i)
+    str = " " + str;
+    return str;
+}
+
+// Get numbers from the input fields.
+function getInput() {
+    var field;
+    var obj = new Object();
+
+    field = document.getElementById("principal");
+    obj.principal = parseFloat(field.value);
+    if (isNaN(obj.principal) || obj.principal &lt;= 0) {
+    errorln("Invalid principal amount '" + field.value + "'. Need a positive number.");
+    return false;
+    }
+
+    field = document.getElementById("amortperiod");
+    obj.amortperiod = parseFloat(field.value);
+    if (isNaN(obj.amortperiod) || obj.amortperiod &lt;= 0) {
+    errorln("Invalid amortization period '" + field.value + "'. Need a positive number.");
+    return false;
+    }
+
+    field = document.getElementById("paymentsperyear");
+    obj.payperyear = parseInt(field.value);
+    if (isNaN(obj.payperyear) || obj.payperyear &lt;= 0) {
+    errorln("Invalid number of payments per year '" + field.value + "'. Need a positive integer.");
+    return false;
+    }
+
+    field = document.getElementById("interest");
+    obj.interest = parseFloat(field.value) / 100;
+    if (isNaN(obj.interest) || obj.interest &lt;= 0) {
+    errorln("Invalid interest rate '" + field.value + "'. Need a positive number.");
+    return false;
+    }
+
+    return obj;
+}
+
+function main() {
+    clearOutput();
+
+    var input = getInput();
+    if (!input)
+    return false;
+
+    var intrate = input.interest / input.payperyear;
+    var numpayments = input.amortperiod * input.payperyear;
+
+    var x = Math.pow(1 + intrate, numpayments)
+    var payments = intrate * input.principal * x / (x - 1);
+
+    writeln("Payments = " + fmtmoney(payments));
+    writeln("Total payments = " + fmtmoney(payments * numpayments));
+    writeln("Interest cost = " + fmtmoney(payments * numpayments - input.principal));
+    writeln("");
+
+    var balance = input.principal;
+    var sumint = 0;
+    var sumprin = 0;
+    var sumpay = 0;
+
+    writeln("Period     Payment    Interest   Principal   Total Pay   Total Int  Total Prin     Balance");
+    for (var i = 1; i &lt;= numpayments; ++i) {
+    sumpay += payments;
+    var thisint = balance * intrate;
+
+    sumint += thisint;
+    var thisprin = payments - thisint;
+    sumprin += thisprin;
+
+    balance -= thisprin;
+
+    writeln(flushright(i, 6) + "  " + 
+        flushright(fmtmoney(payments), 10) + "  " + 
+        flushright(fmtmoney(thisint), 10) + "  " + 
+        flushright(fmtmoney(thisprin), 10) + "  " + 
+        flushright(fmtmoney(sumpay), 10) + "  " + 
+        flushright(fmtmoney(sumint), 10) + "  " + 
+        flushright(fmtmoney(sumprin), 10) + "  " + 
+        flushright(fmtmoney(balance), 10));
+    }
+}
+&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+&lt;/style&gt;
+
+&lt;noscript&gt;
+    &lt;span class="error"&gt;
+    The Loan Amortization calculator requires a browser that supports Javascript.&lt;br /&gt;
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the solver, please upgrade your browser or enable Javascript support.&lt;br /&gt;&amp;nbsp;&lt;br /&gt;
+    &lt;/span&gt;
+&lt;/noscript&gt;
+
+&lt;script type="text/javascript"&gt;
+&lt;!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('&lt;span class="error"&gt;The Loan Amortization calculator requires a browser that supports the W3C DOM API.&lt;br \/&gt;Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.&lt;br \/&gt;&amp;nbsp;&lt;br \/&gt;&lt;\/span&gt;');
+}
+// --&gt;
+&lt;/script&gt;
+
+&lt;form action="#" onsubmit="main(); return false;"&gt;
+    &lt;table cellpadding="5"&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;label for="principal"&gt;Principal:&lt;/label&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="principal" id="principal" size="20" value="50" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;label for="amortperiod"&gt;Amortization Period:&lt;br /&gt;&lt;small&gt;(in years)&lt;/small&gt;&lt;/label&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="amortperiod" id="amortperiod" size="20" value="3" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;label for="paymentsperyear"&gt;Payments per year:&lt;br /&gt;&lt;small&gt;(monthly = 12, weekly = 52)&lt;/small&gt;&lt;/label&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="paymentsperyear" id="paymentsperyear" size="20" value="12" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;label for="interest"&gt;Interest rate:&lt;/label&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;input type="text" name="interest" id="interest" size="20" value="20" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td colspan="2"&gt;&lt;input type="submit" value="Calculate!" /&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/form&gt;
+
+&lt;hr /&gt;
+
+&lt;div id="output"&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    <item>
+      <title>Monthly Calendar</title>
+      <link>/javascript/monthly</link>
+      <description>&lt;style type="text/css"&gt;
+    td, th {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    }
+&lt;/style&gt;
+
+&lt;script language="JavaScript"&gt;
+
+// Returns true if leap year.
+function leapyear(year) {
+    return (year % 400 == 0) || (year % 4 == 0) &amp;&amp; (year % 100 != 0);
+}
+
+// Get last day of the month.
+function getmaxday(month, year) {
+    var monthlen = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var maxday = monthlen[month - 1];
+    if (month == 2 &amp;&amp; leapyear(year))
+    ++maxday;
+    return maxday;
+}
+
+function monthname(month) {
+    var monthnames = [
+    "January", "February", "March",
+    "April", "May", "June",
+    "July", "August", "September",
+    "October", "November", "December"];
+    return monthnames[month - 1];
+}
+
+// Use Zeller's congruence to determine the day of the week for 
+// a specified date.
+function dayofweek(day, month, year) {
+    var century;
+    var yr;
+
+    if (month &lt;= 2) {
+    month += 10;
+    --year;
+    }
+    else
+    month -= 2;
+
+    century = Math.floor(year / 100);
+    yr = year % 100;
+
+    return (Math.floor((26 * month - 2) / 10) + 
+        day + yr + 
+        Math.floor(yr / 4) + 
+        Math.floor(century / 4) +
+        203 - 2 * century) % 7;
+}
+
+
+function debug(str) {
+    var dbg = document.createElement("p");
+    var dbgtxt = document.createTextNode(str);
+    dbg.appendChild(dbgtxt);
+    document.body.appendChild(dbg);
+}
+
+function fillcalendar(month, year) {
+    var tbl = document.getElementById("month");
+    var rows = tbl.rows;
+
+    var firstdayofweek = dayofweek(1, month, year);
+    var maxday = getmaxday(month, year);
+
+    for (var i = 1; i &lt; rows.length; ++i) {
+    var cols = rows[i].cells;
+    for (var j = 0; j &lt; cols.length; ++j) {
+        var celltxt = cols[j].childNodes[0];
+        var day = (i - 1) * 7 + j + 1 - firstdayofweek;
+        if (day &gt; 0 &amp;&amp; day &lt;= maxday)
+        celltxt.data = day;
+        else
+        celltxt.data = " ";
+    }
+    }
+}
+
+function updateform(month, year) {
+    var fmonth = document.getElementsByName("formmonth");
+    var fyear = document.getElementsByName("formyear");
+
+    fmonth[0].value = month;
+    fyear[0].value = year;
+}
+
+function formchanged() {
+    var fmonth = document.getElementsByName("formmonth");
+    var fyear = document.getElementsByName("formyear");
+
+    curmonth = fmonth[0].value;
+    curyear = fyear[0].value;
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+function init() {
+    var now = new Date();
+    curmonth = now.getMonth() + 1;
+    curyear = now.getFullYear();
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+function nextmonth() {
+    ++curmonth;
+    if (curmonth &gt; 12) {
+    curmonth = 1;
+    ++curyear;
+    }
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+function prevmonth() {
+    --curmonth;
+    if (curmonth &lt; 1) {
+    curmonth = 12;
+    --curyear;
+    }
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  init();
+});
+&lt;/script&gt;
+
+&lt;form onsubmit="formchanged(); return false;"&gt;
+    &lt;a href="#" onclick="prevmonth(); return false;"&gt;&amp;lt;&amp;lt;&lt;/a&gt;
+    &lt;select name="formmonth" onchange="formchanged(); return false;"&gt;
+    &lt;option value="1"&gt;January&lt;/option&gt;
+    &lt;option value="2"&gt;February&lt;/option&gt;
+    &lt;option value="3"&gt;March&lt;/option&gt;
+    &lt;option value="4"&gt;April&lt;/option&gt;
+    &lt;option value="5"&gt;May&lt;/option&gt;
+    &lt;option value="6"&gt;June&lt;/option&gt;
+    &lt;option value="7"&gt;July&lt;/option&gt;
+    &lt;option value="8"&gt;August&lt;/option&gt;
+    &lt;option value="9"&gt;September&lt;/option&gt;
+    &lt;option value="10"&gt;October&lt;/option&gt;
+    &lt;option value="11"&gt;November&lt;/option&gt;
+    &lt;option value="12"&gt;December&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;input type="text" name="formyear" size="5" onchange="formchanged(); return false;" /&gt;
+    &lt;a href="#" onclick="nextmonth(); return false;"&gt;&amp;gt;&amp;gt;&lt;/a&gt;
+&lt;/form&gt;
+
+&lt;table rules="all" border="1" id="month"&gt;
+    &lt;tr&gt;
+    &lt;th&gt;Sun&lt;/th&gt;
+    &lt;th&gt;Mon&lt;/th&gt;
+    &lt;th&gt;Tue&lt;/th&gt;
+    &lt;th&gt;Wed&lt;/th&gt;
+    &lt;th&gt;Thu&lt;/th&gt;
+    &lt;th&gt;Fri&lt;/th&gt;
+    &lt;th&gt;Sat&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    <item>
+      <title>Sudoku Solver</title>
+      <link>/javascript/sudoku</link>
+      <description>&lt;script type="text/javascript"&gt;
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Display the board.
+function printboard(board) {
+    for (var i = 0; i &lt; 9; ++i)
+    writeln(board[i].join(""));
+}
+
+// Parse the board info from the text area.
+function processinput(board) {
+    var input = document.getElementById("input");
+    
+    var lineno = 0;
+    var lines = input.value.split("\n", 100);
+    for (var i = 0; i &lt; lines.length; ++i) {
+    var line = lines[i].replace(/\s+/g, "");
+    if (line.length &gt; 0) {
+        if (line.length &lt; 9) {
+        errorln("line " + lineno + " '" + line + "' is too short.");
+        return false;
+        }
+//      writeln(line);
+        var row = new Array();
+        for (var j = 0; j &lt; 9; ++j) {
+        var tmp = parseInt(line.charAt(j));
+        row[j] = isNaN(tmp) ? 0 : tmp;
+        }
+        board[lineno++] = row;
+    }
+    }
+    if (lineno &lt; 9) {
+    errorln("not enough rows. only " + lineno + " found.");
+    return false;
+    }
+    return true;
+}
+
+// Return a list of numbers that could go into cell row, col on the board.
+function getpossible(board, row, col) {
+    var used = [];
+
+// Check row and column.
+    for (var i = 0; i &lt; 9; ++i) {
+    used[board[row][i]] = true;
+    used[board[i][col]] = true;
+    }
+
+// Check the 3x3 block containing this cell.
+    var blockrow = row - row % 3;
+    var blockcol = col - col % 3;
+    for (var i = blockrow; i &lt; blockrow + 3; ++i) {
+    for (var j = blockcol; j &lt; blockcol + 3; ++j)
+        used[board[i][j]] = true;
+    }
+
+    var possible = [];
+    for (var i = 1; i &lt;= 9; ++i)
+    if (!used[i])
+        possible.push(i);
+    return possible;
+}
+
+var nodecount;
+
+// Recursive function to find a solution by exhaustive search.
+function tryboard(board, row, col) {
+    if (row &gt;= 9 || col &gt;= 9) {
+    writeln("");
+    writeln("Found a solution:");
+    printboard(board);
+    return true;
+    }
+    
+    ++nodecount;
+
+    var nextrow = row;
+    var nextcol = col + 1;
+    if (nextcol &gt;= 9) {
+    nextrow = row + 1;
+    nextcol = 0;
+    }
+
+// Skip over cells that are already filled.
+    if (board[row][col] != 0)
+    return tryboard(board, nextrow, nextcol);
+
+    var possible = getpossible(board, row, col);
+    while (possible.length &gt; 0) {
+    var cell = possible.shift();
+    board[row][col] = cell;
+    if (tryboard(board, nextrow, nextcol))
+        return true;
+    }
+    board[row][col] = 0;
+    return false;
+}
+
+function main() {
+    clearOutput();
+    var board = [];
+    if (processinput(board)) {
+    writeln("Puzzle:");
+    printboard(board);
+    nodecount = 0;
+    var start = new Date();
+    if (!tryboard(board, 0, 0))
+        writeln("No solution found");
+    var end = new Date();
+    var elapsed = (end.getTime() - start.getTime()) / 1000;
+    writeln(nodecount + " nodes examined");
+    writeln("Elapsed time: " + elapsed + " seconds");
+    }
+}
+
+&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+&lt;/style&gt;
+
+&lt;noscript&gt;
+    &lt;span class="error"&gt;
+    The Sudoku Solver requires a browser that supports Javascript.&lt;br /&gt;
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the solver, please upgrade your browser or enable Javascript support.&lt;br /&gt;&amp;nbsp;&lt;br /&gt;
+    &lt;/span&gt;
+&lt;/noscript&gt;
+
+&lt;script type="text/javascript"&gt;
+&lt;!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('&lt;span class="error"&gt;The Sudoku Solver requires a browser that supports the W3C DOM API.&lt;br \/&gt;Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.&lt;br \/&gt;&amp;nbsp;&lt;br \/&gt;&lt;\/span&gt;');
+}
+// --&gt;
+&lt;/script&gt;
+
+&lt;form action="#"&gt;
+    Enter the puzzle below:&lt;br /&gt;
+    &lt;textarea id="input" rows="15" cols="40"&gt;xxx 6xx 9x2
+xx6 1xx x87
+2x7 5xx xx1
+
+xxx xx8 7xx
+4x2 xxx 1x6
+xx9 2xx xxx
+
+6xx xx3 5x8
+59x xx1 2xx
+8x4 xx7 xxx&lt;/textarea&gt;&lt;br /&gt;
+    &lt;input type="submit" value="Solve it!" onclick="main(); return false;" /&gt;
+&lt;/form&gt;
+
+&lt;hr /&gt;
+
+&lt;div id="output"&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    <item>
+      <title>Yearly Calendar</title>
+      <link>/javascript/yearly</link>
+      <description>&lt;script type="text/javascript"&gt;
+// Clear the output area.
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a bold string to the output area.
+function writebold(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var bold = document.createElement("b");
+    bold.appendChild(txt);
+    output.appendChild(bold);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Use Zeller's congruence to determine the day of the week for 
+// a specified date.
+// Returns: 0-6 representing Sun-Sat
+function dayofweek(day, month, year) {
+    var century;
+    var yr;
+
+    if (month &lt;= 2) {
+    month += 10;
+    --year;
+    }
+    else
+    month -= 2;
+
+    century = Math.floor(year / 100);
+    yr = year % 100;
+
+    return (Math.floor((26 * month - 2) / 10) + 
+        day + yr + 
+        Math.floor(yr / 4) + 
+        Math.floor(century / 4) +
+        203 - 2 * century) % 7;
+}
+
+// Returns true if leap year.
+function leapyear(year) {
+    return (year % 400 == 0) || (year % 4 == 0) &amp;&amp; (year % 100 != 0);
+}
+
+// Get last day of the month.
+function getmaxday(month, year) {
+    var monthlen = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var maxday = monthlen[month - 1];
+    if (month == 2 &amp;&amp; leapyear(year))
+    ++maxday;
+    return maxday;
+}
+
+// Returns a string of nspaces space characters.
+function spacer(nspaces) {
+    var str = "";
+    for (var i = 0; i &lt; nspaces; ++i)
+    str += " ";
+    return str;
+}
+
+// Format s flush right in a field of width characters.
+function flushright(s, width) {
+    var str = s.toString();
+    return spacer(width - str.length) + str;
+}
+
+function generateCalendar(year) {
+    var monthnames = [
+    "January", "February", "March",
+    "April", "May", "June",
+    "July", "August", "September",
+    "October", "November", "December"
+    ];
+
+    // Center the year at the top.
+    write(spacer(Math.floor((70 - year.toString().length) / 2)));
+    writebold(year);
+    writeln("");
+    // There needs to be at least one space between the two linebreaks
+    // or IE will only render one linebreak.
+    writeln(" ");
+
+    for (var row = 0; row &lt;= 3; ++row) {
+    for (var col = 0; col &lt;= 2; ++col) {
+        var monthname = monthnames[row * 3 + col];
+        var spacebefore = Math.floor((19 - monthname.length) / 2) + 2;
+
+        // Center the month name over the month.
+        write(spacer(spacebefore));
+        writebold(monthname);
+        write(spacer(24 - monthname.length - spacebefore));
+    }
+    writeln("");
+    writeln(" ");
+
+    // Write the day name headings.
+    for (var col = 0; col &lt;= 2; ++col) 
+        write("  S  M  T  W  T  F  S   ");
+    writeln("");
+
+    // Format the months one row at a time.
+    for (var vcell = 0; vcell &lt;= 5; ++vcell) {
+        for (var col = 0; col &lt;= 2; ++col) {
+        var month = row * 3 + col + 1;
+        var maxday = getmaxday(month, year);
+        var firstday = dayofweek(1, month, year);
+        for (var hcell = 0; hcell &lt;= 6; ++hcell) {
+            var day = vcell * 7 + hcell + 1 - firstday;
+            write(day &gt; 0 &amp;&amp; day &lt;= maxday ? flushright(day,3) : "   ");
+        }
+        write("   ");
+        }
+        writeln("");
+    }
+    writeln(" ");
+    }
+} // generateCalendar
+
+function main() {
+    clearOutput();
+
+    var field = document.getElementById("year");
+    var year = parseInt(field.value);
+    if (isNaN(year) || year &lt; 1) {
+    errorln("Invalid year '" + field.value + "'. Need a positive integer.");
+    return;
+    }
+
+    generateCalendar(year);
+}
+
+// Set the year field to the current year.
+function init() {
+    var now = new Date();
+    var field = document.getElementById("year");
+    field.value = now.getFullYear();
+    main();
+}
+
+// For moving to the next or previous year. delta should be 1 or -1.
+function nextyear(delta) {
+    var field = document.getElementById("year");
+    var year = parseInt(field.value);
+    if (!isNaN(year))
+    field.value = year + delta;
+    main();
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  init();
+});
+&lt;/script&gt;
+
+&lt;style type="text/css"&gt;
+body {
+    background: #fff;
+    color: #000;
+    font: normal 14px sans-serif;
+}
+
+h1 {
+    font: bold 18px sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    background: #cff;
+    white-space: pre;    
+    font: normal 14px monospace;
+}
+
+form {
+    margin-bottom: 0.5em;
+}
+&lt;/style&gt;
+
+&lt;noscript&gt;
+    &lt;span class="error"&gt;
+    The Yearly Calendar requires a browser that supports Javascript.&lt;br /&gt;
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to generate the calendar, please upgrade your browser or enable Javascript support.&lt;br /&gt;&amp;nbsp;&lt;br /&gt;
+    &lt;/span&gt;
+&lt;/noscript&gt;
+
+&lt;script type="text/javascript"&gt;
+&lt;!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+document.write('&lt;span class="error"&gt;The Yearly Calendar requires a browser that supports the W3C DOM API.&lt;br \/&gt;Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.&lt;br \/&gt;&amp;nbsp;&lt;br \/&gt;&lt;\/span&gt;');
+}
+// --&gt;
+&lt;/script&gt;
+
+&lt;form action="#" onsubmit="main(); return false;"&gt;
+    &lt;a href="#" onclick="nextyear(-1); return false;"&gt;&amp;lt;&amp;lt;&lt;/a&gt;
+    &lt;input type="text" name="year" id="year" size="10" value="" /&gt;
+    &lt;a href="#" onclick="nextyear(1); return false;"&gt;&amp;gt;&amp;gt;&lt;/a&gt;
+&lt;/form&gt;
+
+&lt;hr /&gt;
+
+&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;div id="output"&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+</description>
+    </item>
+  </channel>
+</rss>

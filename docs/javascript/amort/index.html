@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MortonFox.com: Loan Amortization Calculator</title>
+
+  <link rel="shortcut icon" href="/assets/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link href='/assets/stylesheets/default-14fe0173e29cc3b890390addd200b7dc.css' type='text/css' rel='stylesheet' media='all'></head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-3 siteicon">
+                    <a href="/"><img src="/assets/media/siteicon.png" width="110" height="100" alt="site icon"></a>
+                </div>
+                <div class="col-xs-9">
+                    <h1>MortonFox.com<br><small>Using the nuclear option every day!</small></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="sidemenu nav nav-pills nav-stacked">
+                    <li ><a href="/">Home</a></li>
+                    <li ><a href="/about">About Me</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li ><a href="/about/findmeon">Find me on...</a></li>
+                          <li ><a href="/about/contact">Contact me</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/hobbies">Hobbies</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/con_reports">Con Reports</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/furry">Furry</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/fursuits">Fursuits</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/geocaching">Geocaching</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/wheresgeorge">Where&#39;s George?</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/postcrossing">Postcrossing</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/projects">Projects</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/projects/youtim">YouTim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twitvim">TwitVim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/plainsq">PlainSquare</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/nuvigc">nuvigc</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twstat">twstat and twstat-web</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/tenmill">10 Million Photos Flickr group stats</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cvtmyc">Convert Mycaches</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cr48">Cr-48 binaries</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/otherproj">Other projects</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/java">Java Programs</a></li>
+                        <li 
+                          
+                          class="active"
+                          ><a href="/projects/js">Javascript Programs</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/attic">Attic</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/attic/icqamc">Morton and Digeri&#39;s ICQ Away Message collection</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/attic/photo">Photo Archive</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <h1>Loan Amortization Calculator</h1>
+                <script type="text/javascript">
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Format floating point number in fixed-point notation.
+function fixedfmt(num, decimals) {
+    // Number.toFixed is a Javascript 1.5 feature, so we need to test for it here.
+    return num.toFixed ? num.toFixed(decimals) : num;
+}
+
+function fmtmoney(num) {
+    if (Math.abs(num) < 0.005)
+    num = 0;
+    return "$" + fixedfmt(num, 2);
+}
+
+function fmtpct(num) {
+    return fixedfmt(num * 100, 2) + "%";
+}
+
+function flushright(s, width) {
+    var str = s.toString();
+    var pad = width - str.length;
+    for (var i = 0; i < pad; ++i)
+    str = " " + str;
+    return str;
+}
+
+// Get numbers from the input fields.
+function getInput() {
+    var field;
+    var obj = new Object();
+
+    field = document.getElementById("principal");
+    obj.principal = parseFloat(field.value);
+    if (isNaN(obj.principal) || obj.principal <= 0) {
+    errorln("Invalid principal amount '" + field.value + "'. Need a positive number.");
+    return false;
+    }
+
+    field = document.getElementById("amortperiod");
+    obj.amortperiod = parseFloat(field.value);
+    if (isNaN(obj.amortperiod) || obj.amortperiod <= 0) {
+    errorln("Invalid amortization period '" + field.value + "'. Need a positive number.");
+    return false;
+    }
+
+    field = document.getElementById("paymentsperyear");
+    obj.payperyear = parseInt(field.value);
+    if (isNaN(obj.payperyear) || obj.payperyear <= 0) {
+    errorln("Invalid number of payments per year '" + field.value + "'. Need a positive integer.");
+    return false;
+    }
+
+    field = document.getElementById("interest");
+    obj.interest = parseFloat(field.value) / 100;
+    if (isNaN(obj.interest) || obj.interest <= 0) {
+    errorln("Invalid interest rate '" + field.value + "'. Need a positive number.");
+    return false;
+    }
+
+    return obj;
+}
+
+function main() {
+    clearOutput();
+
+    var input = getInput();
+    if (!input)
+    return false;
+
+    var intrate = input.interest / input.payperyear;
+    var numpayments = input.amortperiod * input.payperyear;
+
+    var x = Math.pow(1 + intrate, numpayments)
+    var payments = intrate * input.principal * x / (x - 1);
+
+    writeln("Payments = " + fmtmoney(payments));
+    writeln("Total payments = " + fmtmoney(payments * numpayments));
+    writeln("Interest cost = " + fmtmoney(payments * numpayments - input.principal));
+    writeln("");
+
+    var balance = input.principal;
+    var sumint = 0;
+    var sumprin = 0;
+    var sumpay = 0;
+
+    writeln("Period     Payment    Interest   Principal   Total Pay   Total Int  Total Prin     Balance");
+    for (var i = 1; i <= numpayments; ++i) {
+    sumpay += payments;
+    var thisint = balance * intrate;
+
+    sumint += thisint;
+    var thisprin = payments - thisint;
+    sumprin += thisprin;
+
+    balance -= thisprin;
+
+    writeln(flushright(i, 6) + "  " + 
+        flushright(fmtmoney(payments), 10) + "  " + 
+        flushright(fmtmoney(thisint), 10) + "  " + 
+        flushright(fmtmoney(thisprin), 10) + "  " + 
+        flushright(fmtmoney(sumpay), 10) + "  " + 
+        flushright(fmtmoney(sumint), 10) + "  " + 
+        flushright(fmtmoney(sumprin), 10) + "  " + 
+        flushright(fmtmoney(balance), 10));
+    }
+}
+</script>
+
+<style type="text/css">
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+</style>
+
+<noscript>
+    <span class="error">
+    The Loan Amortization calculator requires a browser that supports Javascript.<br />
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the solver, please upgrade your browser or enable Javascript support.<br />&nbsp;<br />
+    </span>
+</noscript>
+
+<script type="text/javascript">
+<!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('<span class="error">The Loan Amortization calculator requires a browser that supports the W3C DOM API.<br \/>Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.<br \/>&nbsp;<br \/><\/span>');
+}
+// -->
+</script>
+
+<form action="#" onsubmit="main(); return false;">
+    <table cellpadding="5">
+    <tr>
+        <td><label for="principal">Principal:</label></td>
+        <td><input type="text" name="principal" id="principal" size="20" value="50" /></td>
+    </tr>
+    <tr>
+        <td><label for="amortperiod">Amortization Period:<br /><small>(in years)</small></label></td>
+        <td><input type="text" name="amortperiod" id="amortperiod" size="20" value="3" /></td>
+    </tr>
+    <tr>
+        <td><label for="paymentsperyear">Payments per year:<br /><small>(monthly = 12, weekly = 52)</small></label></td>
+        <td><input type="text" name="paymentsperyear" id="paymentsperyear" size="20" value="12" /></td>
+    </tr>
+    <tr>
+        <td><label for="interest">Interest rate:</label></td>
+        <td><input type="text" name="interest" id="interest" size="20" value="20" /></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" value="Calculate!" /></td>
+    </tr>
+    </table>
+</form>
+
+<hr />
+
+<div id="output">
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- vim: set tw=0 et: -->

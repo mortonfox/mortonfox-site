@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title/>
+    <description/>
+    <link/>
+    <pubDate>2026-11-19</pubDate>
+    <item>
+      <title>Analog Clock</title>
+      <link>/java/clock</link>
+      <description>&lt;p&gt;A simple analog clock applet. This applet can be resized really small so if for some reason, you want a little clock on a web page, go ahead and use it.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/assets/media/java/Clock.java"&gt;Source code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;applet archive="/assets/media/java/clock.jar" code="clock.class" width="500" height="500"&gt;
+&lt;param name="foreground" value="0xFFFFFF"&gt;
+&lt;param name="background" value="0x000000"&gt;
+&lt;/applet&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Fireworks Display</title>
+      <link>/java/firewrk</link>
+      <description>&lt;p&gt;This applet generates a simple fireworks display with up to ten explosions consisting of up to ten rays each at a time. &lt;/p&gt;
+
+&lt;p&gt;The original program just shot the rays out straight. I thought that was unrealistic so in this rewrite, I added a vertical adjustment to simulate gravity.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/assets/media/java/firewrk.java"&gt;Source code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;applet archive="/assets/media/java/firewrk.jar" code=firewrk.class width=700 height=500&gt;
+&lt;/applet&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Maze Generator</title>
+      <link>/java/mazegen</link>
+      <description>&lt;p&gt;This applet generates a maze. Enter the number of rows and columns of maze cells that you want and click on Go.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/assets/media/java/mazegen.java"&gt;Source code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;applet archive="/assets/media/java/mazegen.jar" code="mazegen.class" width=500 height=500&gt;
+&lt;/applet&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Moving Worms</title>
+      <link>/java/worms</link>
+      <description>&lt;p&gt;Up to ten worms move around on the screen at the same time. This is a really simple animation. It does not even make the worms avoid running over each other.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/assets/media/java/worms.java"&gt;Source code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;applet archive="/assets/media/java/worms.jar" code=worms.class width=700 height=500&gt;
+&lt;/applet&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Perpetual Calendar</title>
+      <link>/java/calendar</link>
+      <description>&lt;p&gt;Displays the calendar for any year from 1 to 9999.&lt;/p&gt;
+
+&lt;p&gt;Just enter the year you want in the input box at the top and hit return.&lt;/p&gt;
+
+&lt;p&gt;Strictly speaking, it isn&amp;#39;t historically accurate since it just extends the Gregorian calendar all the way back to year 1, but going forward, it should be fine.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/assets/media/java/calendar.java"&gt;Source code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;applet archive="/assets/media/java/calendar.jar" code=calendar.class width=600 height=700&gt;
+&lt;/applet&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Taquin</title>
+      <link>/java/taquin</link>
+      <description>&lt;p&gt;This is the old sliding tiles game.&lt;/p&gt;
+
+&lt;p&gt;The first two buttons at the top reset the puzzle to normal (numbers in order) and inverted configurations.&lt;/p&gt;
+
+&lt;p&gt;The inverted configuration is the same as the normal but with the last two numbers switched. There is no sequence of moves that will get the puzzle from the inverted configuration to the normal one.&lt;/p&gt;
+
+&lt;p&gt;The last button makes about 100 random moves, in effect scrambling the puzzle.&lt;/p&gt;
+
+&lt;p&gt;To slide the tiles, click on the tile that you want to move into the empty space.
+The arrow keys work too if keyboard focus is within the applet.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/assets/media/java/taquin.java"&gt;Source code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;applet archive="/assets/media/java/taquin.jar" code=taquin.class width=410 height=450&gt;
+&lt;/applet&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>The "hopalong" strange attractor</title>
+      <link>/java/hopalong</link>
+      <description>&lt;p&gt;A strange attractor is a chaotic system from which patterns emerge. Hopalong is one of a collection of formulae that, when plotted, produce unusual and strikingly beautiful images.&lt;/p&gt;
+
+&lt;p&gt;The Go button starts the plotter.&lt;/p&gt;
+
+&lt;p&gt;The Random button generates new values for P, Q and R.&lt;/p&gt;
+
+&lt;p&gt;New values entered in the P, Q and R fields do not take effect immediately. You&amp;#39;ll have to click on Go again to restart the plotter.&lt;/p&gt;
+
+&lt;p&gt;The Hopalong Fractal was originally by Barry Martin of Aston University and published in Dewney&amp;#39;s article in the Sept 1986 Scientific American.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/assets/media/java/hopalong.java"&gt;Source code&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;applet archive="/assets/media/java/hopalong.jar" code=hopalong.class width=700 height=600&gt;
+&lt;/applet&gt;&lt;/p&gt;
+</description>
+    </item>
+  </channel>
+</rss>

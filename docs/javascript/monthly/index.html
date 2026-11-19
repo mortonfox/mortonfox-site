@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MortonFox.com: Monthly Calendar</title>
+
+  <link rel="shortcut icon" href="/assets/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link href='/assets/stylesheets/default-14fe0173e29cc3b890390addd200b7dc.css' type='text/css' rel='stylesheet' media='all'></head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-3 siteicon">
+                    <a href="/"><img src="/assets/media/siteicon.png" width="110" height="100" alt="site icon"></a>
+                </div>
+                <div class="col-xs-9">
+                    <h1>MortonFox.com<br><small>Using the nuclear option every day!</small></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="sidemenu nav nav-pills nav-stacked">
+                    <li ><a href="/">Home</a></li>
+                    <li ><a href="/about">About Me</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li ><a href="/about/findmeon">Find me on...</a></li>
+                          <li ><a href="/about/contact">Contact me</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/hobbies">Hobbies</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/con_reports">Con Reports</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/furry">Furry</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/fursuits">Fursuits</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/geocaching">Geocaching</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/wheresgeorge">Where&#39;s George?</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/postcrossing">Postcrossing</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/projects">Projects</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/projects/youtim">YouTim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twitvim">TwitVim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/plainsq">PlainSquare</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/nuvigc">nuvigc</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twstat">twstat and twstat-web</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/tenmill">10 Million Photos Flickr group stats</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cvtmyc">Convert Mycaches</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cr48">Cr-48 binaries</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/otherproj">Other projects</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/java">Java Programs</a></li>
+                        <li 
+                          
+                          class="active"
+                          ><a href="/projects/js">Javascript Programs</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/attic">Attic</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/attic/icqamc">Morton and Digeri&#39;s ICQ Away Message collection</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/attic/photo">Photo Archive</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <h1>Monthly Calendar</h1>
+                <style type="text/css">
+    td, th {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    }
+</style>
+
+<script language="JavaScript">
+
+// Returns true if leap year.
+function leapyear(year) {
+    return (year % 400 == 0) || (year % 4 == 0) && (year % 100 != 0);
+}
+
+// Get last day of the month.
+function getmaxday(month, year) {
+    var monthlen = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var maxday = monthlen[month - 1];
+    if (month == 2 && leapyear(year))
+    ++maxday;
+    return maxday;
+}
+
+function monthname(month) {
+    var monthnames = [
+    "January", "February", "March",
+    "April", "May", "June",
+    "July", "August", "September",
+    "October", "November", "December"];
+    return monthnames[month - 1];
+}
+
+// Use Zeller's congruence to determine the day of the week for 
+// a specified date.
+function dayofweek(day, month, year) {
+    var century;
+    var yr;
+
+    if (month <= 2) {
+    month += 10;
+    --year;
+    }
+    else
+    month -= 2;
+
+    century = Math.floor(year / 100);
+    yr = year % 100;
+
+    return (Math.floor((26 * month - 2) / 10) + 
+        day + yr + 
+        Math.floor(yr / 4) + 
+        Math.floor(century / 4) +
+        203 - 2 * century) % 7;
+}
+
+
+function debug(str) {
+    var dbg = document.createElement("p");
+    var dbgtxt = document.createTextNode(str);
+    dbg.appendChild(dbgtxt);
+    document.body.appendChild(dbg);
+}
+
+function fillcalendar(month, year) {
+    var tbl = document.getElementById("month");
+    var rows = tbl.rows;
+
+    var firstdayofweek = dayofweek(1, month, year);
+    var maxday = getmaxday(month, year);
+
+    for (var i = 1; i < rows.length; ++i) {
+    var cols = rows[i].cells;
+    for (var j = 0; j < cols.length; ++j) {
+        var celltxt = cols[j].childNodes[0];
+        var day = (i - 1) * 7 + j + 1 - firstdayofweek;
+        if (day > 0 && day <= maxday)
+        celltxt.data = day;
+        else
+        celltxt.data = " ";
+    }
+    }
+}
+
+function updateform(month, year) {
+    var fmonth = document.getElementsByName("formmonth");
+    var fyear = document.getElementsByName("formyear");
+
+    fmonth[0].value = month;
+    fyear[0].value = year;
+}
+
+function formchanged() {
+    var fmonth = document.getElementsByName("formmonth");
+    var fyear = document.getElementsByName("formyear");
+
+    curmonth = fmonth[0].value;
+    curyear = fyear[0].value;
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+function init() {
+    var now = new Date();
+    curmonth = now.getMonth() + 1;
+    curyear = now.getFullYear();
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+function nextmonth() {
+    ++curmonth;
+    if (curmonth > 12) {
+    curmonth = 1;
+    ++curyear;
+    }
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+function prevmonth() {
+    --curmonth;
+    if (curmonth < 1) {
+    curmonth = 12;
+    --curyear;
+    }
+
+    updateform(curmonth, curyear);
+    fillcalendar(curmonth, curyear);
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  init();
+});
+</script>
+
+<form onsubmit="formchanged(); return false;">
+    <a href="#" onclick="prevmonth(); return false;">&lt;&lt;</a>
+    <select name="formmonth" onchange="formchanged(); return false;">
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+    </select>
+    <input type="text" name="formyear" size="5" onchange="formchanged(); return false;" />
+    <a href="#" onclick="nextmonth(); return false;">&gt;&gt;</a>
+</form>
+
+<table rules="all" border="1" id="month">
+    <tr>
+    <th>Sun</th>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wed</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+</table>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- vim: set tw=0 et: -->

@@ -1,0 +1,56 @@
+*dir 	photos-19990911
+*title 	Trenton NJ Meet 9/11/1999
+*order 	urbanword mall diner
+
+*dir	photos-19991002
+*title	NYC Meet 10/2/1999
+*order	donuthole clockbuilding wolven fakefish waterstreet weirdblocks
+*order	portapotty boat birds ferry diner subway
+
+*dir	photos-19991106
+*title	Paramus NJ Meet 11/6/1999
+*order	mall mallfloor park fuddr fuddfloor fuddtable fuddwood lot sign
+*order	flag
+
+*dir	photos-19991112
+*title	Philcon 11/12 - 11/14/1999
+*order	panel room icehouse blaze masq dale party view lounge
+
+*dir	photos-20000108
+*title	Long Island Meet 1/8/2000
+*order	car rf tgif lot
+
+*dir	photos-20000123
+*title	NYC Meet 1/23/2000
+*order	theater street subway streetb bluemoon streetc atm lirr 
+*order	subwayb dumpling subwayc path
+
+*dir	photos-20000220
+*title	Elmwood Park Zoo, Norristown PA 2/20/2000
+*order	lynx alligator armadillo cougar bison jaguar bjaguar 
+*order  duck swan beaver otter gang goose
+*order	hawk eagle owl ram fisher deer horse goat sheep burro 
+*order  wolf skunk falcon porcupine fox apartm
+
+*dir	photos-20000318
+*title	NYC Meet 3/18/2000
+*order	sta mcd stb suba stc subb std parrot ste subc stf mall 
+*order  stg swt groc subd vmega
+
+*dir	photos-20000723
+*title	NYC Meet 7/23/2000
+*order	parkplace gct fifth bus cpark zoo cparkb ferry lower wtc
+
+*dir	photos-20000916
+*title  Rapid T Rabbit's birthday NYC 9/16/2000
+*order  fdny stardust times vms
+
+*dir	photos-20001007
+*title	NYC Meet 10/7/2000
+*order	wtc gct suba sta mm gv subb sif
+
+*dir	photos-20010318
+*title	NYC Meet 3/18/2001
+*order	gct bus st sub sta busa bp fr rst
+
+vim:set tw=0:

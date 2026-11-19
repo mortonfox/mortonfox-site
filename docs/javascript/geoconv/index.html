@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MortonFox.com: Coordinates Converter</title>
+
+  <link rel="shortcut icon" href="/assets/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link href='/assets/stylesheets/default-14fe0173e29cc3b890390addd200b7dc.css' type='text/css' rel='stylesheet' media='all'></head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-3 siteicon">
+                    <a href="/"><img src="/assets/media/siteicon.png" width="110" height="100" alt="site icon"></a>
+                </div>
+                <div class="col-xs-9">
+                    <h1>MortonFox.com<br><small>Using the nuclear option every day!</small></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="sidemenu nav nav-pills nav-stacked">
+                    <li ><a href="/">Home</a></li>
+                    <li ><a href="/about">About Me</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li ><a href="/about/findmeon">Find me on...</a></li>
+                          <li ><a href="/about/contact">Contact me</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/hobbies">Hobbies</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/con_reports">Con Reports</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/furry">Furry</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/fursuits">Fursuits</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/geocaching">Geocaching</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/wheresgeorge">Where&#39;s George?</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/postcrossing">Postcrossing</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/projects">Projects</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/projects/youtim">YouTim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twitvim">TwitVim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/plainsq">PlainSquare</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/nuvigc">nuvigc</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twstat">twstat and twstat-web</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/tenmill">10 Million Photos Flickr group stats</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cvtmyc">Convert Mycaches</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cr48">Cr-48 binaries</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/otherproj">Other projects</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/java">Java Programs</a></li>
+                        <li 
+                          
+                          class="active"
+                          ><a href="/projects/js">Javascript Programs</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/attic">Attic</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/attic/icqamc">Morton and Digeri&#39;s ICQ Away Message collection</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/attic/photo">Photo Archive</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <h1>Coordinates Converter</h1>
+                <script type="text/javascript">
+
+var result_count = 0;
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+
+    document.getElementById("outnorth").value = "";
+    document.getElementById("outwest").value = "";
+    document.getElementById("outcoords").value = "";
+    document.getElementById("outgeotag").value = "";
+    result_count = 0;
+    return true;
+}
+
+function newFrag() {
+    return document.createDocumentFragment();
+}
+
+function writeFrag(frag) {
+    var output = document.getElementById("output");
+    output.insertBefore(frag, output.firstChild);
+}
+
+// Write a string to the document fragment.
+function write(frag, str) {
+    var txt = document.createTextNode(str);
+    frag.appendChild(txt);
+}
+
+// Write a string with a newline to the document fragment.
+function writeln(frag, str) {
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    frag.appendChild(txt);
+    frag.appendChild(newline);
+}
+
+// Write a heading with a newline to the document fragment.
+function writeln_head(frag, str) {
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var head = document.createElement("u");
+    head.appendChild(txt);
+    frag.appendChild(head);
+    frag.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.insertBefore(span, output.firstChild);
+}
+
+// Format floating point number in fixed-point notation.
+function fixedfmt(num, decimals) {
+    // Number.toFixed is a Javascript 1.5 feature, so we need to
+    // test for it here.
+    return num.toFixed ? num.toFixed(decimals) : num;
+}
+
+// Convert coordinates from ddd mm.mmm to decimals.
+function convert(deg, minwhole, mindec) {
+    // Force the decimal portion of the minutes to be 3 decimal places.
+    // And then trim leading zeros.
+    mindec = ((mindec + "000") . slice(0, 3) . replace(/^0+/, "")) || "0";
+
+    // Trim leading zeros so that the string will not be treated as octal.
+    minwhole = minwhole.replace(/^0+/, "") || "0";
+    deg = deg.replace(/^0+/, "") || "0";
+
+    return parseInt(deg) + (parseInt(minwhole) + parseInt(mindec) / 1000) / 60;
+}
+
+function main() {
+    var inputfield = document.getElementById("input");
+    var coordpat = /(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)/;
+    var result = inputfield.value.match(coordpat);
+    if (result == null) {
+    errorln("Not recognized as coordinates: '" + inputfield.value + "'");
+    return false;
+    }
+    var northcoord = fixedfmt(convert(result[1], result[2], result[3]), 6);
+    var westcoord = fixedfmt(-convert(result[4], result[5], result[6]), 6);
+    ++result_count;
+
+    var nwcoords = northcoord + " " + westcoord;
+    var geotag = "geotagged geo:lat=" + northcoord + " geo:lon=" + westcoord;
+
+    var frag = newFrag();
+    writeln_head(frag, result_count + ": " + inputfield.value);
+    writeln(frag, northcoord);
+    writeln(frag, westcoord);
+    writeln(frag, nwcoords);
+    writeln(frag, geotag);
+    writeln(frag, " ");
+    writeFrag(frag);
+
+    document.getElementById("outnorth").value = northcoord;
+    document.getElementById("outwest").value = westcoord;
+    document.getElementById("outcoords").value = nwcoords;
+    document.getElementById("outgeotag").value = geotag;
+    return true;
+}
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+  clearOutput();
+});
+</script>
+
+<style type="text/css">
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 { font-size: 20px; }
+
+.error { color: red; }
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+
+form { margin: 1em 0; }
+
+input[type="text"]:hover { background: #ffa; }
+</style>
+
+<noscript>
+    <span class="error">
+    The Coordinates Converter requires a browser that supports Javascript.<br />
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the solver, please upgrade your browser or enable Javascript support.<br />&nbsp;<br />
+    </span>
+</noscript>
+
+<script type="text/javascript">
+<!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('<span class="error">The Coordinates Converter requires a browser that supports the W3C DOM API.<br \/>Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.<br \/>&nbsp;<br \/><\/span>');
+}
+// -->
+</script>
+
+<form action="#" onsubmit="main(); return false;">
+    <label>Enter dd mm.mmm coordinates here to get dd.dddddd coordinates below:<br />
+    <input type="text" name="input" id="input" size="60" value="n39 40.401 w74 17.207" onfocus="select();" /></label><br />
+    <input type="submit" value="Convert it" />&nbsp;
+    <input type="button" value="Clear results" onclick="clearOutput();" />
+</form>
+
+<hr />
+
+<form action="#" onsubmit="return false;">
+    Results: (select/copy from below)<br />
+    <input type="text" id="outnorth" size="15" onclick="select();" value="" />&nbsp;
+    <input type="text" id="outwest" size="15" onclick="select();" value="" /><br />
+    <input type="text" id="outcoords" size="30" onclick="select();" value="" /><br />
+    <input type="text" id="outgeotag" size="60" onclick="select();" value="" />
+</form>
+
+<hr />
+
+<p><br />
+<div id="output"></div></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- vim: set tw=0 et: -->

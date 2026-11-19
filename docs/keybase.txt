@@ -1,0 +1,45 @@
+==================================================================
+https://keybase.io/mortonfox
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://mortonfox.com
+  * I am mortonfox (https://keybase.io/mortonfox) on keybase.
+  * I have a public key with fingerprint 7D4B 11DF 0FEC E9D3 CB8B  C1B8 A61A CB58 C2F3 03D0
+
+To do so, I am signing this object:
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.8
+Comment: https://keybase.io/crypto
+
+yMJgAnicbZJtiFVFGMfvrma6IGqGBArBSAXusp05Z8683G3BWnD7VpYKsi678/LM
+3cP13nM999yry7agsli0peVS1kJF0ba+FQhqqZtsL5QWKWYh6Cr5JcKiSPdDRmzN
+2epLNF+GeeY/v/8z/5lPF87JNTVs2P/cT7U/em80fPnR67XcelP7cQCp2PSj/AAq
+wuxko3IBkkoSlVOUR8wQhbGxngUNwgRacaWx4pJiqVXItW8DLzAeakF9cTU74TBK
+VqE1il3NLXoi46r/oy/ObnjYw8KExAcqA2504GFpMHBmhabAtTW+CDUoQYRlnhWY
+caII18ynQLHgBhT2pMPV/vYJlNTUUyA0SCENCMqZUwnpMwle5lurQlKWJXDqUpyk
+cdnG29BgC0qgHhchi6AaFVzXVZTvQhoYBIHwhNY+pYZTCRoLYNhih+WUSWGpZFJS
+4vrk2BrMFeZAhKsaaTyLuh3bWdYjPQvPYvqvfauOS66zShKnsY43u62+NK3ks67S
+/kom3Qqq5x9Ij4rKxj2SO1CHpBrFZZTHTqnTKKNiEviUMExYC4JtlSiBnihThIxy
+z43MBuoO6QMOJPEtCbH1Qhn4hrugCSjDnEwZMJgILgNLleaBlaHlDEjoK+xyx1Sg
+7FpbyjHKO6dUFhzSBVeWaS0BNPjx5Ka5uYam3Lw7GrNvlmtasPjfz7dlxZ0z+d62
+TnJh5elTT64qjTWtZZdvkUvrFh/Yuvo6OfP92b6HzcoH0/k793S1L4iOje/6ffex
+pdM7fk6Orn9x40PX1kx3PG03T3zYvehI+y41ueyb7mfp59/dOP2uaRve4O+5fHii
+OY7nNF4dvfbLrReaW/u8tqfuvv3K7bvQ5L7d/QcLzYVDUw+cW/LVF/fcvDKy783l
+73szNy/tfXtk7tTME+dNZ/WT34pvFKeW/Nk1+tq3J9q7hi8e4pPrhk7sP9P4zsjx
+ift3PLr6seGd24c2LXy8dvFI+KpaNfbW2H17Tw6+9EF8cnT61/C9s4cfWfT8wHjn
+qXvX/rBizcvmme1DHW35zw6U6vOX+vD18vHe6x1/AZ9CS6A=
+=l0XF
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mortonfox
+
+==================================================================
+

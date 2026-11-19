@@ -1,0 +1,264 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title/>
+    <description/>
+    <link/>
+    <pubDate>2026-11-19</pubDate>
+    <item>
+      <title>10 Million Photos Flickr group stats</title>
+      <link>/projects/tenmill</link>
+      <description>&lt;p&gt;This set of scripts scans the &lt;a href="https://www.flickr.com/groups/10millionphotos/"&gt;10 Million Photos&lt;/a&gt; Flickr group and generates leaderboards showing the top posters within the last day, within the last week, and overall. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The last run of these scripts was in July 2011. Once the Flickr group hit 10 million photos, which is the actual Flickr group size limit, posting activity had to stop and posting stats were no longer meaningful.&lt;/p&gt;
+
+&lt;p&gt;These scripts are written in Perl. The overall stats script keeps track of when it was last run and only needs to scan the Flickr group from that point onwards. User stats will be accurate even if the script misses any photo additions or deletions because it calls flickr.groups.pools.getPhotos to adjust photo counts for each user.&lt;/p&gt;
+
+&lt;p&gt;The trailing week stats script uses a binary search to find out where to start scanning the group photostream. The same script also generates trailing day stats.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/ten-million-photos"&gt;Project Page&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Convert Mycaches</title>
+      <link>/projects/cvtmyc</link>
+      <description>&lt;p&gt;Convert Mycaches is a Chrome packaged app that converts HTML from the geocaching.com Your Profile page into a HTML-formatted list of geocaches suitable for posting to Livejournal or Dreamwidth.&lt;/p&gt;
+
+&lt;p&gt;This app is implemented as a single HTML file with embedded Javascript to do the conversion. The other files are for Google Chrome to manage it as an extension.&lt;/p&gt;
+
+&lt;p&gt;Since this app is not in the Chrome Web Store, you have to install it by selecting &amp;quot;Load unpacked extension...&amp;quot; in the Chrome Extensions page with Developer mode enabled.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/cvtmyc"&gt;Project Page&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Cr-48 binaries</title>
+      <link>/projects/cr48</link>
+      <description>&lt;p&gt;&lt;a href="https://github.com/mortonfox/cr48"&gt;My cr48 repository&lt;/a&gt; on Github is a fork of helloandre&amp;#39;s cr48 repository. The purpose of this project is to make the Google Cr-48 Chromebook more useful for coding by building various tools that one can run in ChromeOS developer mode.&lt;/p&gt;
+
+&lt;p&gt;There are two ways to get binaries for ChromeOS:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Static build under any 32-bit Linux. (I use Ubuntu 11.04 running under VirtualBox.)&lt;/li&gt;
+&lt;li&gt;Arch Linux packages. (Only some packages work and the ones that work are not always from the latest build.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ChromeOS binaries currently included in this project include Vim, Python, Perl, Ruby, Mercurial, git, Subversion, GNU diffutils, GNU screen, rsync, Info-ZIP, GNU less, and Dropbox. It is a joint effort between &lt;a href="https://github.com/helloandre"&gt;helloandre&lt;/a&gt;, &lt;a href="https://github.com/hominaut"&gt;hominaut&lt;/a&gt;, &lt;a href="https://github.com/signalnine"&gt;signalnine&lt;/a&gt;, and myself.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This project hasn&amp;#39;t been maintained since November 2011 because I stopped using the Chromebook.&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Java Programs</title>
+      <link>/projects/java</link>
+      <description>&lt;p&gt;I came across a collection of Turbo Pascal programs that I wrote some time in the 1980s. Since I no longer had Turbo Pascal installed, I decided to rewrite some of those programs in Java. Here are the results.&lt;/p&gt;
+
+&lt;p&gt;Note that since these applets are all based on JDK 1.1, you&amp;#39;ll need Netscape 4.x or later, Opera with the Sun Java Plugin 1.1.x, or the equivalent Internet Explorer versions. In addition, since each of these applets comes with a main() routine, you can run them with the standalone Java runtime if you have installed the JDK. (If none of that made any sense, just try running the applets. The worst that could happen is they won&amp;#39;t do anything and I&amp;#39;ve been there already. :) )&lt;/p&gt;
+
+&lt;p&gt;Also, if you are using JRE 8, you&amp;#39;ll have to add this domain to the Security Exception Site List. None of the applets have been signed with a certificate from a trusted authority and these will therefore not pass any browser security checks.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/java/clock"&gt;Analog Clock&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/java/firewrk"&gt;Fireworks Display&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/java/hopalong"&gt;The &amp;quot;hopalong&amp;quot; strange attractor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/java/mazegen"&gt;Maze Generator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/java/worms"&gt;Moving Worms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/java/calendar"&gt;Perpetual Calendar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/java/taquin"&gt;Taquin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+</description>
+    </item>
+    <item>
+      <title>Javascript Programs</title>
+      <link>/projects/js</link>
+      <description>&lt;p&gt;These are a bunch of simple programs written in Javascript. Each program is hosted on its own web page.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/javascript/monthly"&gt;Monthly Calendar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/javascript/yearly"&gt;Yearly Calendar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/javascript/sudoku"&gt;Sudoku Solver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/javascript/gscore"&gt;George Score Calculator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/javascript/geoconv"&gt;Coordinates Converter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/javascript/amort"&gt;Loan Amortization Calculator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/javascript/centcirc"&gt;Find Center of Circle Given 3 Points on the Circumference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+</description>
+    </item>
+    <item>
+      <title>Other projects</title>
+      <link>/projects/otherproj</link>
+      <description>&lt;p&gt;&lt;a href="https://github.com/mortonfox/nerdtree-iterm"&gt;nerdtree-iterm&lt;/a&gt; is a collection of &lt;a href="https://github.com/scrooloose/nerdtree"&gt;NERDTree&lt;/a&gt; plugins:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;iterm_menu_item&lt;/code&gt;: Adds a menu item to open the selected folder in iTerm. (i.e. open a shell window and cd to that folder)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;clip_path&lt;/code&gt;: Adds a menu item to copy the selected path to the clipboard.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ag_path&lt;/code&gt;: Adds a menu item to search for a keyword or regex under the selected path using &lt;a href="https://github.com/rking/ag.vim"&gt;ag.vim&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ags_path&lt;/code&gt;: Same as &lt;code&gt;ag_path&lt;/code&gt; but uses &lt;a href="https://github.com/gabesoft/vim-ags"&gt;vim-ags&lt;/a&gt; instead.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/flickr_friend"&gt;flickr-friend&lt;/a&gt; 
+uses &lt;a href="http://www.seleniumhq.org/"&gt;Selenium WebDriver&lt;/a&gt;, &lt;a href="http://www.nokogiri.org/"&gt;Nokogiri&lt;/a&gt; and Safari to scrape the &lt;a href="https://www.flickr.com/"&gt;Flickr&lt;/a&gt; friends and followers lists of the currently logged-in Flickr user. Then it groups the contacts into 3 sets: mutual friends, only followers, and only following. This project includes another script that does the same on &lt;a href="http://www.foodspotting.com"&gt;Foodspotting&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/gyp"&gt;gyp&lt;/a&gt; uses Nokogiri to parse a &amp;quot;Geocaching - Your Profile&amp;quot; page and generates a geocache list suitable for pasting into Livejournal.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/costbas"&gt;costbas&lt;/a&gt; reads a Quicken QIF file and produces a cost basis report.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/pool-rb"&gt;pool-rb&lt;/a&gt; has two scripts that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;moderate Flickr views groups, removing photos that are over or under a group&amp;#39;s view count range&lt;/li&gt;
+&lt;li&gt;manages your photo views group membership, moving photos into and out of views groups, as necessary&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/twittertools"&gt;Twitter Tools&lt;/a&gt; is a small collection of Python scripts to manage Twitter friends, followers, and lists.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/mbnote"&gt;mbnote&lt;/a&gt; is a simple notebook app for mobile web using PHP and SQLite. This project was for a college course in the early 1990s and will no longer be maintained.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;I&amp;#39;ve shared many more scripts in the &lt;a href="http://randomfox.livejournal.com/"&gt;Random Fox Livejournal&lt;/a&gt;.&lt;/p&gt;
+
+&lt;!-- vim:set tw=0: --&gt;
+</description>
+    </item>
+    <item>
+      <title>PlainSquare</title>
+      <link>/projects/plainsq</link>
+      <description>&lt;p&gt;&lt;a href="/assets/media/plainsq/Plainsq - Main.png"&gt;&lt;img src="/assets/media/plainsq/Plainsq - Main.thumbnail.png" width="69" height="100" alt="PlainSquare - Main"&gt;&lt;/a&gt;
+&lt;a href="/assets/media/plainsq/Plainsq - Detect Location.png"&gt;&lt;img src="/assets/media/plainsq/Plainsq - Detect Location.thumbnail.png" width="69" height="100" alt="PlainSquare - Detect Location"&gt;&lt;/a&gt;
+&lt;a href="/assets/media/plainsq/Plainsq - Venue Search.png"&gt;&lt;img src="/assets/media/plainsq/Plainsq - Venue Search.thumbnail.png" width="69" height="100" alt="PlainSquare - Venue Search"&gt;&lt;/a&gt;
+&lt;a href="/assets/media/plainsq/Plainsq - Specials.png"&gt;&lt;img src="/assets/media/plainsq/Plainsq - Specials.thumbnail.png" width="69" height="100" alt="PlainSquare - Specials"&gt;&lt;/a&gt;
+&lt;a href="/assets/media/plainsq/Plainsq - Leaderboard.png"&gt;&lt;img src="/assets/media/plainsq/Plainsq - Leaderboard.thumbnail.png" width="69" height="100" alt="PlainSquare - Leaderboard"&gt;&lt;/a&gt;
+&lt;a href="/assets/media/plainsq/Plainsq - Badges.png"&gt;&lt;img src="/assets/media/plainsq/Plainsq - Badges.thumbnail.png" width="69" height="100" alt="PlainSquare - Badges"&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;PlainSquare is a lightweight Foursquare client for mobile web browsers. It is intended as a full-featured substitute for Foursquare Mobile. PlainSquare supports both geolocation (using device GPS or cellular / wi-fi positioning) and manual coordinate entry for phones without GPS.&lt;/p&gt;
+
+&lt;p&gt;PlainSquare speeds up check-ins by making this operation single-click if you do not need to shout or change your broadcast options. PlainSquare is also designed to send you through as few screens as possible to do most common Foursquare tasks.&lt;/p&gt;
+
+&lt;p&gt;PlainSquare uses OAuth version 2 to log in to Foursquare to avoid having to store user passwords. PlainSquare supports version 2 of the Foursquare API. It is written in Python and designed for hosting on Google App Engine.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/plainsq"&gt;Project page&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://plainsq.appspot.com/"&gt;Live demo&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>/projects</link>
+      <description>&lt;p&gt;I had specific things I needed that weren&amp;#39;t covered by existing software packages, so I wrote the software. And now, I share it with you.&lt;/p&gt;
+
+&lt;p&gt;I make no guarantees about the functionality or usability of this software, and you&amp;#39;ll probably have to do some work building it and setting it up. If you use the source code in software of your own, please credit me and link to the source if possible.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/projects/youtim"&gt;YouTim&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/twitvim"&gt;TwitVim&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/plainsq"&gt;PlainSquare&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/nuvigc"&gt;nuvigc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/twstat"&gt;twstat and twstat-web&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/tenmill"&gt;10 Million Photos Flickr group stats&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/cvtmyc"&gt;Convert Mycaches&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/cr48"&gt;Cr-48 binaries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/otherproj"&gt;Other projects&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/java"&gt;Java Programs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/projects/js"&gt;Javascript Programs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+</description>
+    </item>
+    <item>
+      <title>TwitVim</title>
+      <link>/projects/twitvim</link>
+      <description>&lt;p&gt;&lt;a href="/assets/media/twitvim/Twitvim-pub.png"&gt;&lt;img src="/assets/media/twitvim/Twitvim-pub.thumbnail.png" width="100" height="77" alt="TwitVim - public timeline (no longer available, actually)"&gt;&lt;/a&gt;
+&lt;a href="/assets/media/twitvim/Twitvim-user.png"&gt;&lt;img src="/assets/media/twitvim/Twitvim-user.thumbnail.png" width="100" height="77" alt="TwitVim - user profile and timeline"&gt;&lt;/a&gt;
+&lt;a href="/assets/media/twitvim/Twitvim-search.png"&gt;&lt;img src="/assets/media/twitvim/Twitvim-search.thumbnail.png" width="100" height="77" alt="TwitVim - Twitter Search"&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;TwitVim is a Twitter client implemented as a Vim plugin.&lt;/p&gt;
+
+&lt;p&gt;TwitVim supports many features of typical Twitter clients, including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Friends, User, Direct Message, Mentions, and List timelines&lt;/li&gt;
+&lt;li&gt;Hashtags and Twitter Search&lt;/li&gt;
+&lt;li&gt;Posting updates, replying, and retweeting&lt;/li&gt;
+&lt;li&gt;List management&lt;/li&gt;
+&lt;li&gt;In-reply-to&lt;/li&gt;
+&lt;li&gt;User profile display&lt;/li&gt;
+&lt;li&gt;URL shortening and expansion, including auto-expansion of t.co URLs&lt;/li&gt;
+&lt;li&gt;OAuth login and fast switching between multiple users&lt;/li&gt;
+&lt;li&gt;Timeline filtering&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;TwitVim also supports identi.ca through its Twitter-compatible API.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://vim.sourceforge.net/scripts/script.php?script_id=2204"&gt;Project page and downloads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://bitbucket.org/mortonfox/twitvim"&gt;Development source code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    <item>
+      <title>YouTim</title>
+      <link>/projects/youtim</link>
+      <description>&lt;p&gt;YouTim is an object-oriented Javascript library that simplifies converting to and from UTM coordinates. It includes a few examples to show how one can use this library and UTM coordinates for geometric calculations.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://mortonfox.github.io/YouTim/"&gt;Project page&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    <item>
+      <title>nuvigc</title>
+      <link>/projects/nuvigc</link>
+      <description>&lt;p&gt;The nuvigc script reads a &lt;a href="http://gsak.net/"&gt;GSAK&lt;/a&gt; database and generates a GPX file suitable for passing to &lt;a href="http://www.garmin.com/us/maps/poiloader"&gt;Garmin POI Loader&lt;/a&gt; to load onto a Garmin n&amp;uuml;vi GPS.&lt;/p&gt;
+
+&lt;p&gt;We can visualize the flow of geocaching data like so:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;geocaching.com pocket query -&amp;gt; GSAK -&amp;gt; nuvigc -&amp;gt; POI Loader -&amp;gt; n&amp;uuml;vi GPS&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;nuvigc is based on an older GSAK macro at &lt;a href="http://geocaching.williamsonnetwork.com/"&gt;Garmin Nuvi - True Paperless Geocaching&lt;/a&gt; but instead of running as a macro within GSAK, it runs as a standalone Python script and can thus be called easily from a batch file.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/nuvigc"&gt;Project page&lt;/a&gt;&lt;/p&gt;
+
+&lt;!-- vim:set tw=0: --&gt;
+</description>
+    </item>
+    <item>
+      <title>twstat and twstat-web</title>
+      <link>/projects/twstat</link>
+      <description>&lt;p&gt;&lt;a href="https://github.com/mortonfox/twstat"&gt;twstat&lt;/a&gt; is a Ruby script that generates stats charts from a downloaded Twitter archive using Google Chart Tools. Twitter archives can be downloaded by clicking on &amp;quot;Request your archive&amp;quot; in your Twitter settings page. twstat generates charts for tweets by month, day of week, hour, top mentions, and top clients for both the last 30 days and all time. twstat also generates word clouds using jQCloud. &lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/mortonfox/twstat-web"&gt;twstat-web&lt;/a&gt; is a Ruby on Rails wrapper around twstat that generates and hosts chart pages.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://mortonfox.github.io/twstat/twstat-sample.html"&gt;Sample Twitter stats chart page&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://qslv.com/twstat/dashboard"&gt;twstat-web live demo&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+  </channel>
+</rss>

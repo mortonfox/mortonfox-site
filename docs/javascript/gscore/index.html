@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MortonFox.com: George Score Calculator</title>
+
+  <link rel="shortcut icon" href="/assets/media/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<link href='/assets/stylesheets/default-14fe0173e29cc3b890390addd200b7dc.css' type='text/css' rel='stylesheet' media='all'></head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-xs-3 siteicon">
+                    <a href="/"><img src="/assets/media/siteicon.png" width="110" height="100" alt="site icon"></a>
+                </div>
+                <div class="col-xs-9">
+                    <h1>MortonFox.com<br><small>Using the nuclear option every day!</small></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="sidemenu nav nav-pills nav-stacked">
+                    <li ><a href="/">Home</a></li>
+                    <li ><a href="/about">About Me</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li ><a href="/about/findmeon">Find me on...</a></li>
+                          <li ><a href="/about/contact">Contact me</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/hobbies">Hobbies</a>
+                      <ul class="nav nav-pills nav-stacked">
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/con_reports">Con Reports</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/furry">Furry</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/fursuits">Fursuits</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/geocaching">Geocaching</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/wheresgeorge">Where&#39;s George?</a></li>
+                          <li 
+                              
+                              
+                          ><a href="/hobbies/postcrossing">Postcrossing</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/projects">Projects</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/projects/youtim">YouTim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twitvim">TwitVim</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/plainsq">PlainSquare</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/nuvigc">nuvigc</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/twstat">twstat and twstat-web</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/tenmill">10 Million Photos Flickr group stats</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cvtmyc">Convert Mycaches</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/cr48">Cr-48 binaries</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/otherproj">Other projects</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/projects/java">Java Programs</a></li>
+                        <li 
+                          
+                          class="active"
+                          ><a href="/projects/js">Javascript Programs</a></li>
+                      </ul>
+                    </li>
+                    <li ><a href="/attic">Attic</a>
+                      <ul class="nav nav-pills nav-stacked">
+                        <li 
+                          
+                          
+                          ><a href="/attic/icqamc">Morton and Digeri&#39;s ICQ Away Message collection</a></li>
+                        <li 
+                          
+                          
+                          ><a href="/attic/photo">Photo Archive</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-9">
+                <h1>George Score Calculator</h1>
+                <script type="text/javascript">
+
+function clearOutput() {
+    var output = document.getElementById("output");
+    while (output.firstChild)
+    output.removeChild(output.firstChild);
+}
+
+// Write a string to the output area.
+function write(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    output.appendChild(txt);
+}
+
+// Write a string with a newline to the output area.
+function writeln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    output.appendChild(txt);
+    output.appendChild(newline);
+}
+
+// Write a string in red to signify an error.
+function errorln(str) {
+    var output = document.getElementById("output");
+    var txt = document.createTextNode(str);
+    var newline = document.createElement("br");
+    var span = document.createElement("span");
+    // setAttribute("class" ...) does not work in IE.
+    span.className = "error";
+    span.appendChild(txt);
+    span.appendChild(newline);
+    output.appendChild(span);
+}
+
+// Format floating point number in fixed-point notation.
+function fixedfmt(num, decimals) {
+    // Number.toFixed is a Javascript 1.5 feature, so we need to test for it here.
+    return num.toFixed ? num.toFixed(decimals) : num;
+}
+
+// Get numbers from the input fields.
+function getInput() {
+    var field = document.getElementById("billsentered");
+    var obj = new Object();
+    obj.be = parseInt(field.value);
+    if (isNaN(obj.be) || obj.be < 0) {
+    errorln("Invalid number '" + field.value + "' specified for bills entered. Need a non-negative number for this field.");
+    return false;
+    }
+    field = document.getElementById("totalhits");
+    obj.th = parseInt(field.value);
+    if (isNaN(obj.th) || obj.th < 0) {
+    errorln("Invalid number '" + field.value + "' specified for total hits. Need a non-negative number for this field.");
+    return false;
+    }
+    field = document.getElementById("daysinactive");
+    obj.di = parseInt(field.value);
+    if (isNaN(obj.di) || obj.di < 0) {
+    errorln("Invalid number '" + field.value + "' specified for days inactive. Need a non-negative number for this field.");
+    return false;
+    }
+
+    return obj;
+}
+
+// Calculate George Score
+function gs(be, th, di) {
+    return 100 * (Math.sqrt(Math.log(be)) + Math.log(th + 1)) * (1 - di / 90);
+}
+
+function showneeded(hitpred, billpred) {
+    writeln("Hits needed for 1GS  = " + fixedfmt(hitpred, 2));
+    writeln("Bills needed for 1GS = " + fixedfmt(billpred, 2));
+    writeln("Bill/Hit ratio       = " + fixedfmt(billpred / hitpred, 3));
+    writeln(" ");
+}
+
+var epsilon = 1e-10;
+
+function equal(a, b) {
+    return Math.abs(a - b) < epsilon * Math.abs(a);
+}
+
+function iszero(a) {
+    return Math.abs(a) < epsilon;
+}
+
+// Find an argument for which fn exceeds fn(0) by 1 or greater.
+function getupper(fn) {
+    var curgs = fn(0);
+    var upper = 1;
+    while (upper < 1e9) {
+    if (fn(upper) - curgs >= 1)
+        return upper;
+    upper *= 2;
+    }
+    return upper;
+}
+
+// Solve for x in the equation fn(x) - fn(0) = 1
+// Uses linear interpolation.
+function solve1gs(fn) {
+    var curgs = fn(0);
+    var a = 0;
+    var b = getupper(fn);
+    var itercount = 0;
+    var xold = a;
+
+    var fa = fn(a) - curgs - 1;
+    var fb = fn(b) - curgs - 1;
+
+    for (;;) {
+    var newx = a - fa * (b - a) / (fb - fa);
+    var newfx = fn(newx) - curgs - 1;
+
+    itercount++;
+    writeln(itercount + ": " + newx + " " + newfx);
+
+    // Sanity check. If too many iterations, quit.
+    if (itercount >= 500) {
+        writeln("Too many iterations. Ending.");
+        writeln(" ");
+        return newx;
+    }
+
+    // Sanity check. If we are getting invalid numbers, quit.
+    if (isNaN(newx)) {
+        writeln("Solver failed. Ending.");
+        writeln(" ");
+        return newx;
+    }
+
+    // Check if close enough to a solution.
+    if (equal(newx, xold) || iszero(newfx)) {
+        writeln(" ");
+        return newx;
+    }
+    xold = newx;
+
+    if (fa * newfx > 0) {
+        a = newx;
+        fa = newfx;
+    }
+    else {
+        b = newx;
+        fb = newfx;
+    }
+    }
+}
+
+function main() {
+    clearOutput();
+
+    var input = getInput();
+    if (!input)
+    return false;
+
+    writeln("Bills entered        = " + input.be);
+    writeln("Total hits           = " + input.th);
+    writeln("Days inactive        = " + input.di);
+    writeln("George Score         = " + fixedfmt(gs(input.be, input.th, input.di), 3));
+    writeln(" ");
+
+    showneeded(
+    (input.th + 1) / 100, 
+    input.be * Math.sqrt(Math.log(input.be)) / 50);
+
+    showneeded(
+    solve1gs(function (incrhits) { return gs(input.be, input.th + incrhits, input.di); }),
+    solve1gs(function (incrbills) { return gs(input.be + incrbills, input.th, input.di); }));
+}
+
+</script>
+
+<style type="text/css">
+body {
+    background: #fff none;
+    color: #000;
+    font: normal 14px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.error {
+    color: red;
+}
+
+#output {
+    white-space: pre;
+    font: normal 14px monospace;
+}
+</style>
+
+<p>This program calculates your <a href="http://www.wheresgeorge.com/">Where&#39;s George</a> score, given the number of bills entered and hits received. It also calculates how many bills or hits you need to increase your George Score by 1.</p>
+
+<noscript>
+    <span class="error">
+    The George Score calculator requires a browser that supports Javascript.<br />
+    Your browser either does not support Javascript or it has Javascript disabled. If you wish to run the calculator, please upgrade your browser or enable Javascript support.<br />&nbsp;<br />
+    </span>
+</noscript>
+
+<script type="text/javascript">
+<!--
+// Test for W3C DOM API.
+if (document.getElementById) {
+}
+else {
+    document.write('<span class="error">The George Score calculator requires a browser that supports the W3C DOM API.<br \/>Your browser does not support this API. If you wish to run the solver, please upgrade your browser. The latest versions of Mozilla Firefox, Opera, and Internet Explorer have support for this API.<br \/>&nbsp;<br \/><\/span>');
+}
+// -->
+</script>
+
+<form action="#" onsubmit="main(); return false;">
+    <table cellpadding="5">
+    <tr>
+        <td><label for="billsentered">Bills Entered:</label></td>
+        <td><input type="text" name="billsentered" id="billsentered" size="20" value="100000" /></td>
+    </tr>
+    <tr>
+        <td><label for="totalhits">Total Hits:</label></td>
+        <td><input type="text" name="totalhits" id="totalhits" size="20" value="20000" /></td>
+    </tr>
+    <tr>
+        <td><label for="daysinactive">Days Inactive:</label></td>
+        <td><input type="text" name="daysinactive" id="daysinactive" size="20" value="0" /></td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" value="Calculate!" /></td>
+    </tr>
+    </table>
+</form>
+
+<hr />
+
+<div id="output">
+</div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<!-- vim: set tw=0 et: -->
